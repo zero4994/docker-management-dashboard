@@ -3,13 +3,31 @@ module.exports = {
     scalar Date
 
     type Image {
-        created_at: Date
-        name: String
-        id: String
+        Created: Date
+        Name: String
+        Id: String
+    }
+
+    type Port {
+        IP: String
+        PrivatePort: Int
+        PublicPort: Int
+        Type: String
+    }
+
+    type Container {
+        Created: Date
+        Image: String
+        Id: String
+        Command: String
+        State: String
+        Status: String
+        Ports: [Port]
     }
     
     type Query {
         Images: [Image]
+        Containers: [Container] 
     }
     `
 };
