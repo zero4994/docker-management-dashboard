@@ -1,7 +1,6 @@
 {
   "name": "docker-management-dashboard",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/zero4994/docker-management-dashboard.git",
   "author": "zero4994 <cavc94@gmail.com>",
   "license": "MIT",
@@ -9,7 +8,8 @@
     "dev": "nodemon index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "hack": "concurrently \"yarn serve\" \"yarn dev\""
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -28,28 +28,10 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
-    "babel-eslint": "^10.0.1",
+    "@vue/eslint-config-prettier": "^3.0.0-rc.10",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
+    "vue-template-compiler": "^2.5.21",
+    "concurrently": "^3.6.1"
   }
 }
