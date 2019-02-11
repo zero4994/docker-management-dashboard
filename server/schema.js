@@ -1,12 +1,15 @@
 module.exports = {
   schema: `
-    type Container {
+    scalar Date
+
+    type Image {
+        created_at: Date
         name: String
         id: String
     }
     
     type Query {
-        Containers: [Container]
+        Images: [Image]
     }
     `
 };
