@@ -1,0 +1,20 @@
+{
+  "name": "docker-management-dashboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zero4994/docker-management-dashboard.git",
+  "author": "zero4994 <cavc94@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dockerode": "^2.5.8",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
