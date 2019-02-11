@@ -27,7 +27,8 @@ module.exports = {
     
     type Query {
         Images: [Image]
-        Containers: [Container] 
+        Containers: [Container]
+        CreateContainer(name: String): String
     }
     `
 };

@@ -22,6 +22,26 @@ module.exports = docker => {
           };
         });
       });
+    },
+    CreateContainer: request => {
+      return docker
+        .createContainer({
+          Image: request.name,
+          AttachStdin: false,
+          AttachStdout: true,
+          AttachStderr: true
+        })
+        .then(container => {
+          console.log("container created with id: ", container.id);
+          return container.start();
+        })
+        .then(process => {
+          return process.id;
+        })
+        .catch(error => {
+          console.error(error.json.message);
+          return error.json.message;
+        });
     }
   };
 };
