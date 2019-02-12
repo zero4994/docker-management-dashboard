@@ -1,9 +1,45 @@
 <template>
-  <h1>Hello World</h1>
+  <div class="container">
+    <div v-for="(container, index) in this.containers" :key="index">
+      <docker-container v-bind:container="container"/>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+import { allContainers } from "../queries";
+import Container from "./Container.vue";
+export default {
+  components: {
+    "docker-container": Container
+  },
+  mounted: async function() {
+    console.log(allContainers);
+    try {
+      const {
+        data: { data }
+      } = await axios({
+        method: "post",
+        url: "/graphql",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify({
+          query: allContainers
+        })
+      });
+
+      console.log(data.Containers);
+      this.containers = data.Containers;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  data: () => ({
+    containers: []
+  })
+};
 </script>
 
 <style>
