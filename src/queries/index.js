@@ -51,4 +51,16 @@ const stopContainer = id => {
     }`;
 };
 
-module.exports = { allImages, allContainers, runContainer, stopContainer };
+const removeContainer = id => {
+  return `mutation {
+      RemoveContainer(id: "${id}")
+  }`;
+};
+
+module.exports = {
+  allImages,
+  allContainers,
+  runContainer,
+  stopContainer,
+  removeContainer
+};

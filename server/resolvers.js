@@ -47,17 +47,29 @@ module.exports = docker => {
         });
     },
     StopContainer: request => {
-      console.log("request", request.id);
+      console.log("Stopping container...", request.id);
       const container = docker.getContainer(request.id);
       return container
         .stop()
-        .then(data => {
-          console.log("This is the data from the container", data);
+        .then(() => {
           return `Container Stop process initiated`;
         })
         .catch(error => {
           console.error("Error=>", error);
-          return error.reason;
+          return `Error: ${error.reason}`;
+        });
+    },
+    RemoveContainer: request => {
+      console.log("Removing container...", request.id);
+      const container = docker.getContainer(request.id);
+      return container
+        .remove({ force: true })
+        .then(() => {
+          return `Container removed`;
+        })
+        .catch(error => {
+          console.error("Error=>", error);
+          return `Error: ${error.json.message}`;
         });
     }
   };

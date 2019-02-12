@@ -55,6 +55,7 @@ module.exports = {
     type Mutation {
         CreateContainer(container: InputContainer): String
         StopContainer(id: String!): String
+        RemoveContainer(id: String!): String
     }
     `
 };
