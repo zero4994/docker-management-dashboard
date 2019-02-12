@@ -57,7 +57,7 @@ export default {
           })
         });
 
-        console.log("this is the data it returned on stop", data);
+        alert(data.StopContainer);
       } catch (error) {
         console.error(error);
       }
