@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{this.image.Name}}</h1>
+    <h2>{{this.image.Name}}</h2>
     <div class="container">
       <div class="card">
         <div class="card-body">
@@ -27,7 +27,7 @@ export default {
       this.image.ContainerPort = "8080";
       const query = runContainer(this.image);
       try {
-        console.log("start container");
+        console.log("starting container");
         const {
           data: { data }
         } = await axios({
@@ -40,8 +40,8 @@ export default {
             query
           })
         });
-
-        console.log("The data,", data);
+        console.log("====>", data);
+        alert(data.CreateContainer);
       } catch (error) {
         console.error(error);
       }

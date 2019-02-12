@@ -27,19 +27,23 @@ module.exports = docker => {
     },
     CreateContainer: request => {
       const container = containerObjectParser(request.container);
-      console.log("container", container);
+      let containerId = "";
       return docker
         .createContainer(container)
         .then(container => {
           console.log("container created with id: ", container.id);
+          containerId = container.id;
           return container.start();
         })
         .then(process => {
-          return process.id;
+          return `Container created with id: ${process.id}`;
         })
         .catch(error => {
-          console.error(error.json.message);
-          return error.json.message;
+          console.log("===>Container id", containerId);
+          console.error("Error:", error.json.message);
+          return `Container created with id: ${containerId}
+             
+          Error: ${error.json.message}`;
         });
     }
   };
