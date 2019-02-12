@@ -12,27 +12,14 @@
           <p>Created: {{image.Created}}</p>
         </li>
       </ul>
-      <button class="btn btn-success btn-block" v-on:click="changeView">RUN</button>
+      <button class="btn btn-success btn-block" v-on:click="$emit('changeView', image)">RUN</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["image"],
-  data: function() {
-    return {
-      currentView: "singleImage"
-    };
-  },
-  mounted() {
-    console.log(this.currentView);
-  },
-  methods: {
-    changeView: function() {
-      this.currentView = "propsImage";
-    }
-  }
+  props: ["image"]
 };
 </script>
 

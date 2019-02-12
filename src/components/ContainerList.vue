@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1>Containers</h1>
     <div v-for="(container, index) in this.containers" :key="index">
       <docker-container v-bind:container="container"/>
     </div>
@@ -15,7 +16,6 @@ export default {
     "docker-container": Container
   },
   mounted: async function() {
-    console.log(allContainers);
     try {
       const {
         data: { data }
@@ -29,8 +29,6 @@ export default {
           query: allContainers
         })
       });
-
-      console.log(data.Containers);
       this.containers = data.Containers;
     } catch (error) {
       console.error(error);
