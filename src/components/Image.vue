@@ -28,4 +28,9 @@ export default {
 
 
 <style>
+.card {
+  -webkit-box-shadow: 3px 3px 18px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 3px 18px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 3px 18px 0px rgba(0, 0, 0, 0.75);
+}
 </style>
