@@ -9,7 +9,7 @@
       </div>
     </div>
     <div v-for="(container, index) in this.containers" :key="index">
-      <docker-container v-bind:container="container"/>
+      <docker-container v-bind:container="container" v-on:fetchAllContainers="fetchAllContainers"/>
     </div>
   </div>
 </template>

@@ -58,6 +58,7 @@ export default {
         });
 
         alert(data.StopContainer);
+        this.$emit("fetchAllContainers");
       } catch (error) {
         console.error(error);
       }
@@ -79,6 +80,7 @@ export default {
         });
 
         alert(data.RemoveContainer);
+        this.$emit("fetchAllContainers");
       } catch (error) {
         console.error(error);
       }

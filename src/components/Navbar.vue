@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-dark bg-docker-blue mb-5">
-    <h1 class="navbar-brand mx-auto">Docker Management Dashboard</h1>
+  <nav class="navbar navbar-light bg-docker-blue mb-5">
+    <h1 class="navbar-brand mx-auto text-black">Docker Management Dashboard</h1>
   </nav>
 </template>
 
