@@ -1,7 +1,14 @@
 <template>
   <div class="container">
     <div v-if="this.currentView === 'all'">
-      <h1>Images</h1>
+      <div class="row">
+        <div class="col-sm-9">
+          <h1>Images</h1>
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-info btn-block" @click="fetchAllImages">Refresh</button>
+        </div>
+      </div>
       <div v-for="(image, index) in this.images" :key="index" class="list-group">
         <docker-image v-bind:image="image" v-on:changeView="changeView"/>
       </div>
@@ -24,25 +31,8 @@ export default {
     "docker-image": Image,
     "docker-image-expanded": ImageExpanded
   },
-  mounted: async function() {
-    try {
-      const {
-        data: { data }
-      } = await axios({
-        method: "post",
-        url: "/graphql",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        data: JSON.stringify({
-          query: allImages
-        })
-      });
-
-      this.images = data.Images;
-    } catch (error) {
-      console.error(error);
-    }
+  mounted: function() {
+    this.fetchAllImages();
   },
   data: () => ({
     images: [],
@@ -50,6 +40,26 @@ export default {
     currentView: "all"
   }),
   methods: {
+    fetchAllImages: async function() {
+      try {
+        const {
+          data: { data }
+        } = await axios({
+          method: "post",
+          url: "/graphql",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: JSON.stringify({
+            query: allImages
+          })
+        });
+
+        this.images = data.Images;
+      } catch (error) {
+        console.error(error);
+      }
+    },
     changeView: function(image) {
       this.currentView = "single";
       this.selectedImage = image;

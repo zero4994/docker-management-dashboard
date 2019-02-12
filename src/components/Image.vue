@@ -12,7 +12,10 @@
           <p>Created: {{image.Created}}</p>
         </li>
       </ul>
-      <button class="btn btn-success btn-block" v-on:click="$emit('changeView', image)">RUN</button>
+      <button
+        class="btn btn-success btn-block"
+        v-on:click="$emit('changeView', image)"
+      >CREATE CONTAINER</button>
     </div>
   </div>
 </template>
