@@ -1,6 +1,13 @@
 <template>
   <div class="container">
-    <h1>Containers</h1>
+    <div class="row">
+      <div class="col-sm-9">
+        <h1>Containers</h1>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-info btn-block" @click="fetchAllContainers">Refresh</button>
+      </div>
+    </div>
     <div v-for="(container, index) in this.containers" :key="index">
       <docker-container v-bind:container="container"/>
     </div>
@@ -15,28 +22,33 @@ export default {
   components: {
     "docker-container": Container
   },
-  mounted: async function() {
-    try {
-      const {
-        data: { data }
-      } = await axios({
-        method: "post",
-        url: "/graphql",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        data: JSON.stringify({
-          query: allContainers
-        })
-      });
-      this.containers = data.Containers;
-    } catch (error) {
-      console.error(error);
-    }
+  mounted: function() {
+    this.fetchAllContainers();
   },
   data: () => ({
     containers: []
-  })
+  }),
+  methods: {
+    fetchAllContainers: async function() {
+      try {
+        const {
+          data: { data }
+        } = await axios({
+          method: "post",
+          url: "/graphql",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: JSON.stringify({
+            query: allContainers
+          })
+        });
+        this.containers = data.Containers;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 };
 </script>
 
