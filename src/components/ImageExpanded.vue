@@ -23,7 +23,9 @@ export default {
   },
   methods: {
     startContainer: async function() {
-      const query = runContainer(this.image.Name);
+      this.image.HostPort = "8081";
+      this.image.ContainerPort = "8080";
+      const query = runContainer(this.image);
       try {
         console.log("start container");
         const {
@@ -38,6 +40,8 @@ export default {
             query
           })
         });
+
+        console.log("The data,", data);
       } catch (error) {
         console.error(error);
       }

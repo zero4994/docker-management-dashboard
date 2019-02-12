@@ -25,8 +25,22 @@ const allContainers = `{
 
 const runContainer = image => {
   console.log(image);
-  return `{
-       CreateContainer(name:"${image}")
+  return `mutation {
+       CreateContainer(container: { Image: "${image.Name}",
+                                    HostConfig: {
+                                        PortBindings: {
+                                            port: {
+                                                name: "${
+                                                  image.ContainerPort
+                                                }/tcp",
+                                                binding: {
+                                                    HostPort: "${
+                                                      image.HostPort
+                                                    }"
+                                                }
+                                            }
+                                        }
+                                    } })
     }`;
 };
 
