@@ -13,26 +13,27 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
     "dockerode": "^2.5.8",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
-    "vue": "^2.5.16",
-    "vuex": "^3.0.1",
-    "bootstrap": "^4.2.1",
+    "graphql-type-json": "^0.2.1",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.7"
+    "popper.js": "^1.14.7",
+    "vue": "^2.5.16",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
-    "babel-eslint": "^10.0.1",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "@vue/eslint-config-prettier": "^3.0.0-rc.10",
+    "babel-eslint": "^10.0.1",
+    "concurrently": "^3.6.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21",
-    "concurrently": "^3.6.1"
+    "nodemon": "^1.18.9",
+    "vue-template-compiler": "^2.5.21"
   }
 }

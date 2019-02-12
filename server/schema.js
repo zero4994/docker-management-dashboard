@@ -24,11 +24,36 @@ module.exports = {
         Status: String
         Ports: [Port]
     }
+
+    input InputBindPort {
+        HostPort: String
+    }
+
+    input InputPort {
+        name: String
+        binding: [InputBindPort]
+    }
+
+    input InputPortBindings {
+        port: [InputPort]
+    }
+
+    input InputHostConfig {
+        PortBindings: InputPortBindings
+    }
+
+    input InputContainer {
+        Image: String
+        HostConfig: InputHostConfig
+    }
     
     type Query {
         Images: [Image]
         Containers: [Container]
-        CreateContainer(name: String): String
+    }
+
+    type Mutation {
+        CreateContainer(container: InputContainer): String
     }
     `
 };

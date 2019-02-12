@@ -1,3 +1,5 @@
+const { containerObjectParser } = require("./utils/container.js");
+
 module.exports = docker => {
   return {
     Images: request => {
@@ -24,13 +26,10 @@ module.exports = docker => {
       });
     },
     CreateContainer: request => {
+      const container = containerObjectParser(request.container);
+      console.log("container", container);
       return docker
-        .createContainer({
-          Image: request.name,
-          AttachStdin: false,
-          AttachStdout: true,
-          AttachStderr: true
-        })
+        .createContainer(container)
         .then(container => {
           console.log("container created with id: ", container.id);
           return container.start();
