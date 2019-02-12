@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else>
-      <docker-image-expanded/>
+      <docker-image-expanded v-bind:image="this.selectedImage"/>
     </div>
   </div>
 </template>
