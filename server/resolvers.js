@@ -2,8 +2,8 @@ const { containerObjectParser } = require("./utils/container.js");
 
 module.exports = docker => {
   return {
-    Images: request => {
-      return docker.listImages({ all: true }).then(images => {
+    Images: () => {
+      return docker.listImages({ all: false }).then(images => {
         return images.map(image => {
           const currentTime = new Date().getTime();
           const timeDiff = currentTime - image.Created;
@@ -15,7 +15,7 @@ module.exports = docker => {
         });
       });
     },
-    Containers: request => {
+    Containers: () => {
       return docker.listContainers({ all: true }).then(containers => {
         return containers.map(container => {
           return {
@@ -44,6 +44,20 @@ module.exports = docker => {
           return `Container created with id: ${containerId}
              
           Error: ${error.json.message}`;
+        });
+    },
+    StopContainer: request => {
+      console.log("request", request.id);
+      const container = docker.getContainer(request.id);
+      return container
+        .stop()
+        .then(data => {
+          console.log("This is the data from the container", data);
+          return `Container Stop process initiated`;
+        })
+        .catch(error => {
+          console.error("Error=>", error);
+          return error.reason;
         });
     }
   };

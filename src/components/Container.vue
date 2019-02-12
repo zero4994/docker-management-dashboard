@@ -27,14 +27,42 @@
           </ul>
         </li>
       </ul>
+      <button class="btn btn-danger d-inline mr-4" @click="onStopContainer">STOP CONTAINER</button>
+      <button class="btn btn-dark d-inline">REMOVE CONTAINER</button>
     </div>
   </div>
 </template>
 
 
 <script>
+import axios from "axios";
+import { stopContainer } from "../queries";
+
 export default {
-  props: ["container"]
+  props: ["container"],
+  methods: {
+    onStopContainer: async function() {
+      const query = stopContainer(this.container.Id);
+      try {
+        const {
+          data: { data }
+        } = await axios({
+          method: "post",
+          url: "/graphql",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          data: JSON.stringify({
+            query
+          })
+        });
+
+        console.log("this is the data it returned on stop", data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 };
 </script>
 

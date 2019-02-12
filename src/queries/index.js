@@ -45,4 +45,10 @@ const runContainer = image => {
     }`;
 };
 
-module.exports = { allImages, allContainers, runContainer };
+const stopContainer = id => {
+  return `mutation {
+        StopContainer(id: "${id}")
+    }`;
+};
+
+module.exports = { allImages, allContainers, runContainer, stopContainer };

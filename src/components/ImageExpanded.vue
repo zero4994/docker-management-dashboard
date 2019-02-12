@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <h2>{{this.image.Name}}</h2>
-    <div class="container">
+    <div class>
       <div class="card">
         <div class="card-body">
           <h5>Additional Properties</h5>
           <div class="row">
-            <div class="ml-2 col-sm-4 border border-secondary rounded">
+            <div class="ml-2 mr-2 col-sm-4 border border-secondary rounded">
               <h6 class="mt-2 text-muted">Port Binding</h6>
               <div class="form-group">
                 <label for="hostPort">Host Port</label>
