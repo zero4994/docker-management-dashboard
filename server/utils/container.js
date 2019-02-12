@@ -1,4 +1,6 @@
 const containerObjectParser = object => {
+  if (!object.HostConfig) return object;
+
   const ports = parsePorts(object.HostConfig.PortBindings.port);
   object.HostConfig.PortBindings = ports;
   return object;

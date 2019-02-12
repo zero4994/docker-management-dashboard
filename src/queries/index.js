@@ -24,23 +24,24 @@ const allContainers = `{
 }`;
 
 const runContainer = image => {
-  console.log(image);
+  let hostConfig = "";
+
+  if (image.ContainerPort && image.HostPort) {
+    hostConfig = `,
+        HostConfig: {
+            PortBindings: {
+                port: {
+                    name: "${image.ContainerPort}/tcp",
+                    binding: {
+                        HostPort: "${image.HostPort}"
+                    }
+                }
+            }
+        }`;
+  }
+
   return `mutation {
-       CreateContainer(container: { Image: "${image.Name}",
-                                    HostConfig: {
-                                        PortBindings: {
-                                            port: {
-                                                name: "${
-                                                  image.ContainerPort
-                                                }/tcp",
-                                                binding: {
-                                                    HostPort: "${
-                                                      image.HostPort
-                                                    }"
-                                                }
-                                            }
-                                        }
-                                    } })
+       CreateContainer(container: { Image: "${image.Name}" ${hostConfig} })
     }`;
 };
 
