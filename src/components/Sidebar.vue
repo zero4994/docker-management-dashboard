@@ -2,10 +2,14 @@
   <div class="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li>
-        <h5>Images</h5>
+        <button v-on:click="$emit('changeView', 'Images')">
+          <h5>Images</h5>
+        </button>
       </li>
       <li>
-        <h5>Containers</h5>
+        <button v-on:click="$emit('changeView', 'Containers')">
+          <h5>Containers</h5>
+        </button>
       </li>
     </ul>
   </div>
@@ -13,7 +17,13 @@
 
 
 <script>
-export default {};
+export default {
+  methods: {
+    onLinkClick: function(value) {
+      console.log(value);
+    }
+  }
+};
 </script>
 
 <style scoped>
