@@ -8,7 +8,7 @@ A management dashboard for your local docker containers
     <img align="center" src="img/docker.png"> 
 </p> 
 <br><br>
-Docker Managemenet Dashboard is a simple in browser SPA to manage docker containers in a friendly and interactive way without having to deal with the docker CLI.
+Docker Managemenet Dashboard is a simple in browser SPA to manage your local docker containers in a friendly and interactive way without having to deal with the docker CLI.
 
 Its built using the following technologies:
 
@@ -17,6 +17,7 @@ Its built using the following technologies:
 - [Docker](https://www.docker.com/)
 - Node
 - Express
+- [Dockerode](https://github.com/apocas/dockerode.git)
 
 ## SetUp
 
@@ -52,3 +53,7 @@ Once the application starts the dashboard is available in **http://localhost:300
     <img align="center" height="90%" width="90%" src="img/d-overview.png"> 
 </p> 
 <br><br>
+
+## Contribution
+
+Feel free to fork and contribute to this project
