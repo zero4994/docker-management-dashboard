@@ -47,7 +47,7 @@ export default {
 <style>
 html,
 body {
-  margin-top: 6rem;
+  margin-top: 3rem;
   height: 100%;
 }
 
