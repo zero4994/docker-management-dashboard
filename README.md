@@ -27,3 +27,15 @@ Execute yarn to initialize
 ```bash
 yarn install
 ```
+
+Build the repo
+
+```bash
+yarn build
+```
+
+Finally start the appliation
+
+```bash
+yarn start
+```
