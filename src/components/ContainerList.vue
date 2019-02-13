@@ -1,11 +1,14 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-9">
+      <div class="col-sm-10">
         <h1>Containers</h1>
       </div>
-      <div class="col-sm-3">
-        <button class="btn btn-info btn-block" @click="fetchAllContainers">Refresh</button>
+      <div class="col-sm-2">
+        <button class="btn btn-info btn-block" @click="fetchAllContainers">
+          Refresh
+          <i class="pl-2 fas fa-sync-alt"></i>
+        </button>
       </div>
     </div>
     <div v-for="(container, index) in this.containers" :key="index">

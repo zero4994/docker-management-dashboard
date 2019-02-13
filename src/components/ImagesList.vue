@@ -2,11 +2,14 @@
   <div class="container">
     <div v-if="this.currentView === 'all'">
       <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-10">
           <h1>Images</h1>
         </div>
-        <div class="col-sm-3">
-          <button class="btn btn-info btn-block" @click="fetchAllImages">Refresh</button>
+        <div class="col-sm-2">
+          <button class="btn btn-info btn-block" @click="fetchAllImages">
+            Refresh
+            <i class="pl-2 fas fa-sync-alt"></i>
+          </button>
         </div>
       </div>
       <div v-for="(image, index) in this.images" :key="index" class="list-group">

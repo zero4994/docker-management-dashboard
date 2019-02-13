@@ -27,8 +27,14 @@
           </ul>
         </li>
       </ul>
-      <button class="btn btn-danger d-inline mr-4" @click="onStopContainer">STOP CONTAINER</button>
-      <button class="btn btn-dark d-inline" @click="onRemoveContainer">REMOVE CONTAINER</button>
+      <button class="btn btn-danger d-inline mr-4" @click="onStopContainer">
+        STOP CONTAINER
+        <i class="pl-2 far fa-stop-circle"></i>
+      </button>
+      <button class="btn btn-dark d-inline" @click="onRemoveContainer">
+        REMOVE CONTAINER
+        <i class="pl-2 fas fa-trash-alt"></i>
+      </button>
     </div>
   </div>
 </template>

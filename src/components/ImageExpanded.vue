@@ -20,7 +20,10 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-warning mt-3" v-on:click="startContainer">START CONTAINER</button>
+      <button class="btn btn-warning mt-3" v-on:click="startContainer">
+        START CONTAINER
+        <i class="pl-2 fas fa-play"></i>
+      </button>
     </div>
   </div>
 </template>
