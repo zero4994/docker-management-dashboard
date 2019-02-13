@@ -47,3 +47,8 @@ yarn start
 ## Use
 
 Once the application starts the dashboard is available in **http://localhost:3000**
+
+<p align="center">
+    <img align="center" height="90%" width="90%" src="img/d-overview.png"> 
+</p> 
+<br><br>
