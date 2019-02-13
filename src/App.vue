@@ -8,7 +8,7 @@
     >
     <navbar/>
     <div class="row container-fluid">
-      <div class="col-sm-2">
+      <div id="sidebar" class="col-sm-2 bg-muted border-right border-secondary">
         <sidebar v-on:changeView="changeView"/>
       </div>
       <div class="col-sm-10">
@@ -57,4 +57,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+/* #sidebar {
+  -webkit-box-shadow: 10px 0px 20px -9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 0px 20px -9px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 0px 20px -9px rgba(0, 0, 0, 0.75);
+} */
 </style>
