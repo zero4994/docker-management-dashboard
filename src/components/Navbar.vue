@@ -1,7 +1,17 @@
 <template>
-  <nav class="navbar navbar-light bg-docker-blue mb-5">
-    <h1 class="navbar-brand mx-auto text-black">Docker Management Dashboard</h1>
-  </nav>
+  <div>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous"
+    >
+    <nav class="navbar fixed-top navbar-light bg-docker-blue mb-5">
+      <h1 class="navbar-brand text-black">
+        <i class="text-black fab fa-docker pr-2"></i> Docker Management Dashboard
+      </h1>
+    </nav>
+  </div>
 </template>
 
 <script>
