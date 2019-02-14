@@ -18,13 +18,9 @@
     "bootstrap": "^4.2.1",
     "dockerode": "^2.5.8",
     "express": "^4.16.4",
-    "express-graphql": "^0.7.1",
-    "graphql": "^14.1.1",
-    "graphql-type-json": "^0.2.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7",
     "vue": "^2.5.16",
-    "vuex": "^3.0.1",
     "yarn": "^1.13.0"
   },
   "devDependencies": {
