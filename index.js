@@ -1,6 +1,4 @@
-//const { docker } = require("./server/config");
 const express = require("express");
-//const root = require("./server/resolvers")(docker);
 
 const app = require("./server")();
 const path = require("path");

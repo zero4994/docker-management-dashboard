@@ -1,11 +1,12 @@
 const express = require("express");
+const callback = require("./callbacks");
 
 const initializeServer = () => {
   const app = express();
 
-  app.get("/images", (req, res) => {
-    console.log("This are all the images");
-    return res.sendStatus(200);
+  app.get("/api/images", async (req, res) => {
+    const images = await callback.allImages();
+    res.send(images);
   });
 
   return app;
