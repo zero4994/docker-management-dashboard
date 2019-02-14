@@ -28,6 +28,20 @@ const stopContainer = id => {
     });
 };
 
+const removeContainer = id => {
+  console.log(`Removing container with id: ${id}..`);
+  const container = docker.getContainer(id);
+  return container
+    .remove({ force: true })
+    .then(() => {
+      return `Container removed`;
+    })
+    .catch(error => {
+      console.error("Error=>", error);
+      return `Error: ${error.json.message}`;
+    });
+};
+
 const createContainer = container => {
   console.log(`Creating container`);
   let containerId = "";
@@ -50,4 +64,10 @@ const createContainer = container => {
     });
 };
 
-module.exports = { allImages, allContainers, stopContainer, createContainer };
+module.exports = {
+  allImages,
+  allContainers,
+  stopContainer,
+  createContainer,
+  removeContainer
+};

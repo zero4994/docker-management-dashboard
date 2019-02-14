@@ -28,6 +28,12 @@ const initializeServer = () => {
     res.json(message);
   });
 
+  app.delete("/api/containers/:id/remove", async (req, res) => {
+    const containerId = req.params.id;
+    const message = await callback.removeContainer(containerId);
+    res.json(message);
+  });
+
   return app;
 };
 
