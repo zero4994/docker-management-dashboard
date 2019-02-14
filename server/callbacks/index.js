@@ -14,4 +14,18 @@ const allContainers = () => {
   });
 };
 
-module.exports = { allImages, allContainers };
+const stopContainer = id => {
+  console.log(`Stopping container with id: ${id}...`);
+  const container = docker.getContainer(id);
+  return container
+    .stop()
+    .then(() => {
+      return "Container Stop process initiated";
+    })
+    .catch(error => {
+      console.log("Error=>", error);
+      return `Error: ${error.reason}`;
+    });
+};
+
+module.exports = { allImages, allContainers, stopContainer };
