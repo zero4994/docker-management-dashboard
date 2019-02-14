@@ -16,9 +16,15 @@ const initializeServer = () => {
     res.json(containers);
   });
 
-  app.delete("/api/containers/:id", async (req, res) => {
+  app.delete("/api/containers/:id/stop", async (req, res) => {
     const containerId = req.params.id;
     const message = await callback.stopContainer(containerId);
+    res.json(message);
+  });
+
+  app.post("/api/containers/create", express.json(), async (req, res) => {
+    const container = req.body;
+    const message = await callback.createContainer(container);
     res.json(message);
   });
 
