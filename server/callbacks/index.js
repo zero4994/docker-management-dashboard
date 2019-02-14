@@ -1,9 +1,17 @@
 const { docker } = require("../config");
+
 const allImages = () => {
-  console.log("This are all the images");
+  console.log("Querying all images...");
   return docker.listImages({ all: false }).then(images => {
     return images;
   });
 };
 
-module.exports = { allImages };
+const allContainers = () => {
+  console.log("Querying all containers...");
+  return docker.listContainers({ all: true }).then(containers => {
+    return containers;
+  });
+};
+
+module.exports = { allImages, allContainers };

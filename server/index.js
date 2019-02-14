@@ -6,7 +6,12 @@ const initializeServer = () => {
 
   app.get("/api/images", async (req, res) => {
     const images = await callback.allImages();
-    res.send(images);
+    res.json(images);
+  });
+
+  app.get("/api/containers", async (req, res) => {
+    const containers = await callback.allContainers();
+    res.json(containers);
   });
 
   return app;
