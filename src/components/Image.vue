@@ -1,7 +1,7 @@
 <template>
   <div class="card m-3">
     <div class="card-header">
-      <h5>{{image.Name}}</h5>
+      <h5>{{image.RepoTags[0] || ""}}</h5>
     </div>
     <div class="card-body">
       <ul class="list-group mb-3">

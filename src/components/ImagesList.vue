@@ -45,20 +45,14 @@ export default {
   methods: {
     fetchAllImages: async function() {
       try {
-        const {
-          data: { data }
-        } = await axios({
-          method: "post",
-          url: "/graphql",
+        const { data } = await axios({
+          method: "get",
+          url: "api/images",
           headers: {
             "Content-Type": "application/json"
-          },
-          data: JSON.stringify({
-            query: allImages
-          })
+          }
         });
-
-        this.images = data.Images;
+        this.images = data;
       } catch (error) {
         console.error(error);
       }

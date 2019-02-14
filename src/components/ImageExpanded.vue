@@ -48,20 +48,18 @@ export default {
       const query = runContainer(this.image);
       try {
         console.log("starting container");
-        const {
-          data: { data }
-        } = await axios({
+        const { data } = await axios({
           method: "post",
-          url: "/graphql",
+          url: "/api/containers/create",
           headers: {
             "Content-Type": "application/json"
           },
           data: JSON.stringify({
-            query
+            Image: this.image.RepoTags[0]
           })
         });
         console.log("====>", data);
-        alert(data.CreateContainer);
+        alert(data);
       } catch (error) {
         console.error(error);
       }
