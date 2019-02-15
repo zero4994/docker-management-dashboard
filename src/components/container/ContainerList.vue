@@ -19,7 +19,7 @@
 
 <script>
 import axios from "axios";
-import { allContainers } from "../queries";
+import { allContainers } from "../../queries";
 import Container from "./Container.vue";
 export default {
   components: {

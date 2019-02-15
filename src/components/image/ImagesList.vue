@@ -25,7 +25,6 @@
 
 <script>
 import axios from "axios";
-import { allImages } from "../queries";
 import Image from "./Image.vue";
 import ImageExpanded from "./ImageExpanded.vue";
 

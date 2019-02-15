@@ -42,7 +42,7 @@
 
 <script>
 import axios from "axios";
-import { stopContainer, removeContainer } from "../queries";
+import { stopContainer, removeContainer } from "../../queries";
 
 export default {
   props: ["container"],

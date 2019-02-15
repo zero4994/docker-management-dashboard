@@ -10,15 +10,13 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import Sidebar from "./components/Sidebar.vue";
-import ImagesList from "./components/ImagesList.vue";
-import ContainerList from "./components/ContainerList.vue";
+import ImagesList from "./components/image/ImagesList.vue";
+import ContainerList from "./components/container/ContainerList.vue";
 
 export default {
   name: "App",
   components: {
     navbar: Navbar,
-    sidebar: Sidebar,
     "images-list": ImagesList,
     "containers-list": ContainerList
   },

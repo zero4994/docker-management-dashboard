@@ -30,7 +30,6 @@
 
 
 <script>
-import { runContainer } from "../queries";
 import axios from "axios";
 export default {
   props: ["image"],
@@ -45,7 +44,6 @@ export default {
     startContainer: async function() {
       this.image.HostPort = this.localPort; //8081
       this.image.ContainerPort = this.hostPort; //8080
-      const query = runContainer(this.image);
       try {
         console.log("starting container");
         const { data } = await axios({
