@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="mb-3">
+  <!-- <div id="app" class="mb-3">
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
@@ -16,7 +16,24 @@
         <containers-list v-else/>
       </div>
     </div>
-  </div>
+  </div>-->
+  <v-app>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Vuetify</span>
+        <span class="font-weight-light">MATERIAL DESIGN</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
+        <span class="mr-2">Latest Release</span>
+      </v-btn>
+    </v-toolbar>
+
+    <v-content>
+      <images-list v-if="this.currentView === 'Images'"/>
+      <containers-list v-else/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -26,7 +43,7 @@ import ImagesList from "./components/ImagesList.vue";
 import ContainerList from "./components/ContainerList.vue";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     navbar: Navbar,
     sidebar: Sidebar,
@@ -45,22 +62,10 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  margin-top: 3rem;
-  height: 100%;
-}
-
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
-/* #sidebar {
-  -webkit-box-shadow: 10px 0px 20px -9px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 0px 20px -9px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 0px 20px -9px rgba(0, 0, 0, 0.75);
-} */
 </style>
