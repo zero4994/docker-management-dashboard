@@ -1,21 +1,25 @@
 <template>
-  <div class="container">
+  <div>
     <div v-if="this.currentView === 'all'">
-      <div class="row">
-        <div class="col-sm-10">
+      <v-container fluid grid-list-md>
+        <v-layout row wrap>
           <h1>Images</h1>
-        </div>
-        <div class="col-sm-2">
-          <button class="btn btn-info btn-block" @click="fetchAllImages">
-            Refresh
-            <i class="pl-2 fas fa-sync-alt"></i>
-          </button>
-        </div>
-      </div>
-      <div v-for="(image, index) in this.images" :key="index" class="list-group">
-        <docker-image v-bind:image="image" v-on:changeView="changeView"/>
-      </div>
+          <v-spacer></v-spacer>
+          <v-btn color="cyan" dark @click="fetchAllImages">Refresh
+            <v-icon>refresh</v-icon>
+          </v-btn>
+        </v-layout>
+      </v-container>
+
+      <v-container fluid grid-list-md>
+        <v-layout row wrap>
+          <v-flex v-for="image in this.images" :key="image.Id" v-bind="{ [`md6`]: true }">
+            <docker-image v-bind:image="image" v-on:changeView="changeView"/>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </div>
+
     <div v-else>
       <docker-image-expanded v-bind:image="this.selectedImage"/>
     </div>

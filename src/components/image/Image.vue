@@ -1,22 +1,18 @@
 <template>
-  <div class="card m-3">
-    <div class="card-header">
-      <h5>{{image.RepoTags || ""}}</h5>
-    </div>
-    <div class="card-body">
-      <ul class="list-group mb-3">
-        <li class="list-group-item">
-          <p>Id: {{image.Id}}</p>
-        </li>
-        <li class="list-group-item">
-          <p>Created: {{image.Created}}</p>
-        </li>
-      </ul>
-      <button class="btn btn-success btn-block" v-on:click="$emit('changeView', image)">
-        CREATE CONTAINER
-        <i class="pl-2 fas fa-plus-circle"></i>
-      </button>
-    </div>
+  <div>
+    <v-card>
+      <v-card-actions>
+        <span class="headline">{{ image.RepoTags }}</span>
+      </v-card-actions>
+      <v-btn
+        color="green lighten-2"
+        block
+        dark
+        v-on:click="$emit('changeView', image)"
+      >CREATE CONTAINER
+        <v-icon>add_circle</v-icon>
+      </v-btn>
+    </v-card>
   </div>
 </template>
 
