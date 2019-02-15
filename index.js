@@ -1,5 +1,4 @@
 const express = require("express");
-
 const app = require("./server")();
 const path = require("path");
 

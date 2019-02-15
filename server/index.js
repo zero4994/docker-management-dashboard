@@ -1,8 +1,10 @@
 const express = require("express");
 const callback = require("./callbacks");
+const morgan = require("morgan");
 
 const initializeServer = () => {
   const app = express();
+  app.use(morgan("combined"));
 
   app.get("/api/images", async (req, res) => {
     const images = await callback.allImages();
