@@ -1,34 +1,6 @@
 <template>
-  <!-- <div id="app" class="mb-3">
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-      crossorigin="anonymous"
-    >
-    <navbar/>
-    <div class="row container-fluid">
-      <div id="sidebar" class="col-sm-2 bg-muted border-right border-secondary">
-        <sidebar v-on:changeView="changeView"/>
-      </div>
-      <div class="col-sm-10">
-        <images-list v-if="this.currentView === 'Images'"/>
-        <containers-list v-else/>
-      </div>
-    </div>
-  </div>-->
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
+    <navbar v-on:changeView="changeView"/>
     <v-content>
       <images-list v-if="this.currentView === 'Images'"/>
       <containers-list v-else/>
