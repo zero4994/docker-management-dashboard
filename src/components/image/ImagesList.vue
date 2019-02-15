@@ -55,6 +55,7 @@ export default {
             "Content-Type": "application/json"
           }
         });
+        console.log(data);
         this.images = data;
       } catch (error) {
         console.error(error);
