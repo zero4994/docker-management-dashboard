@@ -1,7 +1,8 @@
 <template>
   <nav>
-    <v-toolbar app>
+    <v-toolbar app color="light-blue darken-4" dark>
       <v-toolbar-title class="headline text-uppercase">
+        <i class="text-black fab fa-docker pr-2"></i>
         <span>Docker</span>
         <span class="font-weight-light">Management Dashboard</span>
       </v-toolbar-title>

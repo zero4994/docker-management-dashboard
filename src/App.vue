@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <navbar v-on:changeView="changeView"/>
     <v-content>
       <images-list v-if="this.currentView === 'Images'"/>
@@ -36,6 +36,7 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  /* //color: #2c3e50; */
+  background-color: #cfeef7;
 }
 </style>
