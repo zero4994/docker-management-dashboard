@@ -27,16 +27,21 @@
         </v-layout>
       </v-container>
     </div>
+    <div v-else>
+      <docker-container v-bind:container="this.selectedContainer"/>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import ContainerPreview from "./ContainerPreview.vue";
+import Container from "./Container.vue";
 import { allContainers } from "../../services/ContainerService.js";
 export default {
   components: {
-    "docker-container-preview": ContainerPreview
+    "docker-container-preview": ContainerPreview,
+    "docker-container": Container
   },
   mounted: function() {
     this.currentView = "all";
@@ -44,7 +49,8 @@ export default {
   },
   data: () => ({
     containers: [],
-    currentView: "all"
+    currentView: "all",
+    selectedContainer: {}
   }),
   methods: {
     fetchAllContainers: async function() {
@@ -55,7 +61,10 @@ export default {
         console.error(error);
       }
     },
-    changeView: function() {}
+    changeView: function(container) {
+      this.selectedContainer = container;
+      this.currentView = "single";
+    }
   }
 };
 </script>
