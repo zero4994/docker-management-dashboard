@@ -1,18 +1,31 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-10">
-        <h1>Containers</h1>
-      </div>
-      <div class="col-sm-2">
-        <button class="btn btn-info btn-block" @click="fetchAllContainers">
-          Refresh
-          <i class="pl-2 fas fa-sync-alt"></i>
-        </button>
-      </div>
-    </div>
-    <div v-for="(container, index) in this.containers" :key="index">
-      <docker-container v-bind:container="container" v-on:fetchAllContainers="fetchAllContainers"/>
+  <div>
+    <div v-if="this.currentView === 'all'">
+      <v-container fluid grid-list-md>
+        <v-layout row wrap>
+          <h1>Containers</h1>
+          <v-spacer></v-spacer>
+          <v-btn color="cyan" dark @click="fetchAllContainers">Refresh
+            <v-icon>refresh</v-icon>
+          </v-btn>
+        </v-layout>
+      </v-container>
+
+      <v-container fluid grid-list-md>
+        <v-layout row wrap>
+          <v-flex
+            v-for="container in this.containers"
+            :key="container.Id"
+            v-bind="{ [`md6`]: true }"
+          >
+            <docker-container-preview
+              v-bind:container="container"
+              v-on:changeView="changeView"
+              v-on:fetchAllContainers="fetchAllContainers"
+            />
+          </v-flex>
+        </v-layout>
+      </v-container>
     </div>
   </div>
 </template>
@@ -20,25 +33,25 @@
 <script>
 import axios from "axios";
 import { allContainers } from "../../queries";
-import Container from "./Container.vue";
+import ContainerPreview from "./ContainerPreview.vue";
 export default {
   components: {
-    "docker-container": Container
+    "docker-container-preview": ContainerPreview
   },
   mounted: function() {
+    this.currentView = "all";
     this.fetchAllContainers();
   },
   data: () => ({
-    containers: []
+    containers: [],
+    currentView: "all"
   }),
   methods: {
     fetchAllContainers: async function() {
       try {
-        const {
-          data: { data }
-        } = await axios({
-          method: "post",
-          url: "/graphql",
+        const { data } = await axios({
+          method: "get",
+          url: "api/containers",
           headers: {
             "Content-Type": "application/json"
           },
@@ -46,11 +59,12 @@ export default {
             query: allContainers
           })
         });
-        this.containers = data.Containers;
+        this.containers = data;
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    changeView: function() {}
   }
 };
 </script>
