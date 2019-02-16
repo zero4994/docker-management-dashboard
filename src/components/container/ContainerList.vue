@@ -33,6 +33,7 @@
 <script>
 import axios from "axios";
 import ContainerPreview from "./ContainerPreview.vue";
+import { allContainers } from "../../services/ContainerService.js";
 export default {
   components: {
     "docker-container-preview": ContainerPreview
@@ -48,13 +49,7 @@ export default {
   methods: {
     fetchAllContainers: async function() {
       try {
-        const { data } = await axios({
-          method: "get",
-          url: "api/containers",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
+        const { data } = await allContainers();
         this.containers = data;
       } catch (error) {
         console.error(error);

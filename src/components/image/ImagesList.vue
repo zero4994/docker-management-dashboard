@@ -28,7 +28,7 @@
 
 
 <script>
-import axios from "axios";
+import { allImages } from "../../services/ImageService.js";
 import Image from "./Image.vue";
 import ImageExpanded from "./ImageExpanded.vue";
 
@@ -48,13 +48,7 @@ export default {
   methods: {
     fetchAllImages: async function() {
       try {
-        const { data } = await axios({
-          method: "get",
-          url: "api/images",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
+        const { data } = await allImages();
         console.log(data);
         this.images = data;
       } catch (error) {

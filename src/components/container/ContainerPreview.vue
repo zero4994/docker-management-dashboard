@@ -51,20 +51,17 @@
 
 <script>
 import axios from "axios";
+import {
+  stopContainer,
+  deleteContainer
+} from "../../services/ContainerService.js";
 
 export default {
   props: ["container"],
   methods: {
     onStopContainer: async function() {
       try {
-        const { data } = await axios({
-          method: "delete",
-          url: `/api/containers/${this.container.Id}/stop`,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-
+        const { data } = await stopContainer(this.container.Id);
         alert(data);
         this.$emit("fetchAllContainers");
       } catch (error) {
@@ -73,13 +70,7 @@ export default {
     },
     onRemoveContainer: async function() {
       try {
-        const { data } = await axios({
-          method: "delete",
-          url: `/api/containers/${this.container.Id}/remove`,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
+        const { data } = await deleteContainer(this.container.Id);
 
         alert(data);
         this.$emit("fetchAllContainers");
