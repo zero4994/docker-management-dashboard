@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h1>Hello World {{this.container.Id}}</h1>
+    <sidebar/>
   </div>
 </template>
 
 
 <script>
+import Sidebar from "./Sidebar.vue";
 export default {
-  props: ["container"]
+  components: { sidebar: Sidebar },
+  props: ["container"],
+  mounted() {
+    console.log(this.container);
+  }
 };
 </script>
 
