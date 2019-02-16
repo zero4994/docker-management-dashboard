@@ -1,5 +1,13 @@
 <template>
-  <v-navigation-drawer v-model="drawer" :mini-variant="mini" absolute dark>
+  <v-navigation-drawer
+    v-model="drawer"
+    :mini-variant="mini"
+    hide-overlay
+    stateless
+    dark
+    permanent
+    absolute
+  >
     <v-list class="pa-1">
       <v-list-tile v-if="mini" @click.stop="mini = !mini">
         <v-list-tile-action>
