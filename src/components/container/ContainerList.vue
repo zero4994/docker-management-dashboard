@@ -32,7 +32,6 @@
 
 <script>
 import axios from "axios";
-import { allContainers } from "../../queries";
 import ContainerPreview from "./ContainerPreview.vue";
 export default {
   components: {
@@ -54,10 +53,7 @@ export default {
           url: "api/containers",
           headers: {
             "Content-Type": "application/json"
-          },
-          data: JSON.stringify({
-            query: allContainers
-          })
+          }
         });
         this.containers = data;
       } catch (error) {
