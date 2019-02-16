@@ -12,12 +12,8 @@
           </v-card>
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
-          <v-card>
-            <v-card-actions>
-              <span class="headline">Additional Info</span>
-            </v-card-actions>
-            <additional-info v-bind:container="container"/>
-          </v-card>
+          <additional-info v-bind:container="container"/>
+          <quick-actions/>
         </v-flex>
       </v-layout>
     </v-container>
@@ -28,8 +24,14 @@
 <script>
 import Sidebar from "./Sidebar.vue";
 import AdditionalInfo from "./AdditionalInfo.vue";
+import QuickActions from "./QuickActions.vue";
+
 export default {
-  components: { sidebar: Sidebar, "additional-info": AdditionalInfo },
+  components: {
+    sidebar: Sidebar,
+    "additional-info": AdditionalInfo,
+    "quick-actions": QuickActions
+  },
   props: ["container"],
   mounted() {
     console.log(this.container);
