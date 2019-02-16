@@ -1,0 +1,49 @@
+<template>
+  <v-list>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>ID</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.Id}}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>Created</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.Created}}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>Labels</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.Label}}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>ParentId</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.ParentId}}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>RepoDigests</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.RepoDigests}}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>SharedSize</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.SharedSize}}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+  </v-list>
+</template>
+
+<script>
+export default {
+  props: ["container"]
+};
+</script>
+
+<style>
+</style>
