@@ -29,3 +29,23 @@ export const deleteContainer = id => {
     }
   });
 };
+
+export const pauseContainer = id => {
+  return axios({
+    method: "post",
+    url: `/api/containers/${id}/pause`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+};
+
+export const unpauseContainer = id => {
+  return axios({
+    method: "post",
+    url: `/api/containers/${id}/unpause`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+};

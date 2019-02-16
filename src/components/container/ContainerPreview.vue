@@ -33,8 +33,11 @@
         <v-btn color="red darken-3" dark @click="onStopContainer">STOP
           <v-icon>stop</v-icon>
         </v-btn>
-        <v-btn color="yellow darken-1" dark>PAUSE
+        <v-btn color="yellow darken-1" dark @click="onPauseContainer">PAUSE
           <v-icon>pause</v-icon>
+        </v-btn>
+        <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">UNPAUSE
+          <v-icon>play_arrow</v-icon>
         </v-btn>
         <!-- <v-btn color="green darken-1" dark>
           <v-icon>add_circle</v-icon>
@@ -53,7 +56,9 @@
 import axios from "axios";
 import {
   stopContainer,
-  deleteContainer
+  deleteContainer,
+  pauseContainer,
+  unpauseContainer
 } from "../../services/ContainerService.js";
 
 export default {
@@ -72,6 +77,24 @@ export default {
       try {
         const { data } = await deleteContainer(this.container.Id);
 
+        alert(data);
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    onPauseContainer: async function() {
+      try {
+        const { data } = await pauseContainer(this.container.Id);
+        alert(data);
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    onUnpauseContainer: async function() {
+      try {
+        const { data } = await unpauseContainer(this.container.Id);
         alert(data);
         this.$emit("fetchAllContainers");
       } catch (error) {
