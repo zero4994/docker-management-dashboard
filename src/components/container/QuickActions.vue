@@ -3,19 +3,46 @@
     <v-card-actions>
       <span class="headline">Quick Actions</span>
     </v-card-actions>
-    <v-btn color="red darken-3" dark @click="onStopContainer">STOP
-      <v-icon>stop</v-icon>
-    </v-btn>
-    <v-btn color="yellow darken-1" dark @click="onPauseContainer">PAUSE
-      <v-icon>pause</v-icon>
-    </v-btn>
-    <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">UNPAUSE
-      <v-icon>play_arrow</v-icon>
-    </v-btn>
-    <v-btn color="grey darken-4" dark @click="onRemoveContainer">
-      REMOVE
-      <i class="fas fa-trash-alt"></i>
-    </v-btn>
+    <v-layout row wrap>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+      <v-flex v-bind="{ [`md6`]: true }">
+        <v-btn color="red darken-3" dark block @click="onStopContainer">STOP
+          <v-icon>stop</v-icon>
+        </v-btn>
+      </v-flex>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+    </v-layout>
+
+    <v-layout row wrap>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+      <v-flex v-bind="{ [`md6`]: true }">
+        <v-btn color="yellow darken-1" dark block @click="onPauseContainer">PAUSE
+          <v-icon>pause</v-icon>
+        </v-btn>
+      </v-flex>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+    </v-layout>
+
+    <v-layout row wrap>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+      <v-flex v-bind="{ [`md6`]: true }">
+        <v-btn color="light-green lighten-1" dark block @click="onUnpauseContainer">UNPAUSE
+          <v-icon>play_arrow</v-icon>
+        </v-btn>
+      </v-flex>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+    </v-layout>
+
+    <v-layout row wrap>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+      <v-flex v-bind="{ [`md6`]: true }">
+        <v-btn color="grey darken-4" dark block @click="onRemoveContainer">
+          REMOVE
+          <i class="fas fa-trash-alt"></i>
+        </v-btn>
+      </v-flex>
+      <v-flex v-bind="{ [`md3`]: true }"></v-flex>
+    </v-layout>
   </v-card>
 </template>
 

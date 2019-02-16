@@ -3,7 +3,6 @@
     <sidebar/>
     <v-container fluid grid-list-md id="workspace">
       <v-layout row wrap>
-        <!-- <v-flex v-bind="{ [`md1`]: true }"></v-flex> -->
         <v-flex v-bind="{ [`md8`]: true }">
           <v-card>
             <v-card-actions>
