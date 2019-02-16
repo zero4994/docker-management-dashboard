@@ -39,9 +39,6 @@
         <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">UNPAUSE
           <v-icon>play_arrow</v-icon>
         </v-btn>
-        <!-- <v-btn color="green darken-1" dark>
-          <v-icon>add_circle</v-icon>
-        </v-btn>-->
         <v-btn color="grey darken-4" dark @click="onRemoveContainer">
           REMOVE
           <i class="fas fa-trash-alt"></i>
@@ -53,7 +50,6 @@
 
 
 <script>
-import axios from "axios";
 import {
   stopContainer,
   deleteContainer,
@@ -107,9 +103,4 @@ export default {
 
 
 <style>
-.card {
-  -webkit-box-shadow: 3px 3px 18px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 3px 3px 18px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 3px 3px 18px 0px rgba(0, 0, 0, 0.75);
-}
 </style>
