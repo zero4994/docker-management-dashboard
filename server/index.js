@@ -36,6 +36,17 @@ const initializeServer = () => {
     res.json(message);
   });
 
+  app.post("/api/containers/:id/pause", async (req, res) => {
+    const containerId = req.params.id;
+    const message = await callback.pauseContainer(containerId);
+    res.json(message);
+  });
+
+  app.post("/api/containers/:id/unpause", async (req, res) => {
+    const containerId = req.params.id;
+    const message = await callback.unpauseContainer(containerId);
+    res.json(message);
+  });
   return app;
 };
 

@@ -64,10 +64,40 @@ const createContainer = container => {
     });
 };
 
+const pauseContainer = id => {
+  console.log(`Pausing container with id: ${id}..`);
+  const container = docker.getContainer(id);
+  return container
+    .pause()
+    .then(() => {
+      return `Container paused`;
+    })
+    .catch(error => {
+      console.error("Error=>", error);
+      return `Error: ${error.json.message}`;
+    });
+};
+
+const unpauseContainer = id => {
+  console.log(`Unpausing container with id: ${id}..`);
+  const container = docker.getContainer(id);
+  return container
+    .unpause()
+    .then(() => {
+      return `Container unpaused`;
+    })
+    .catch(error => {
+      console.error("Error=>", error);
+      return `Error: ${error.json.message}`;
+    });
+};
+
 module.exports = {
   allImages,
   allContainers,
   stopContainer,
   createContainer,
-  removeContainer
+  removeContainer,
+  pauseContainer,
+  unpauseContainer
 };
