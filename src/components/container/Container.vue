@@ -16,7 +16,7 @@
             <v-card-actions>
               <span class="headline">Additional Info</span>
             </v-card-actions>
-            <image-additional-info v-bind:image="image"/>
+            <additional-info v-bind:container="container"/>
           </v-card>
         </v-flex>
       </v-layout>
@@ -27,8 +27,9 @@
 
 <script>
 import Sidebar from "./Sidebar.vue";
+import AdditionalInfo from "./AdditionalInfo.vue";
 export default {
-  components: { sidebar: Sidebar },
+  components: { sidebar: Sidebar, "additional-info": AdditionalInfo },
   props: ["container"],
   mounted() {
     console.log(this.container);

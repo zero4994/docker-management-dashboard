@@ -14,26 +14,26 @@
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
-        <v-list-tile-title>Labels</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.container.Label}}</v-list-tile-sub-title>
+        <v-list-tile-title>Command</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.Command}}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
-        <v-list-tile-title>ParentId</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.container.ParentId}}</v-list-tile-sub-title>
+        <v-list-tile-title>Image</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.Image}}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
-        <v-list-tile-title>RepoDigests</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.container.RepoDigests}}</v-list-tile-sub-title>
+        <v-list-tile-title>State</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.State}}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
-        <v-list-tile-title>SharedSize</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.container.SharedSize}}</v-list-tile-sub-title>
+        <v-list-tile-title>Status</v-list-tile-title>
+        <v-list-tile-sub-title>{{this.container.Status}}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
   </v-list>
