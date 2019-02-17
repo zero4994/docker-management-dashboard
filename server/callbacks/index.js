@@ -101,6 +101,21 @@ const unpauseContainer = id => {
     });
 };
 
+const inspectContainer = id => {
+  console.log(`Inspecting container with id: ${id}`);
+  const container = docker.getContainer(id);
+  return container
+    .inspect()
+    .then(result => {
+      console.log("Container found");
+      return result;
+    })
+    .catch(error => {
+      console.error("Error=>", error);
+      return `Error: ${error.json.message}`;
+    });
+};
+
 module.exports = {
   allImages,
   allContainers,
@@ -109,5 +124,6 @@ module.exports = {
   createContainer,
   removeContainer,
   pauseContainer,
-  unpauseContainer
+  unpauseContainer,
+  inspectContainer
 };

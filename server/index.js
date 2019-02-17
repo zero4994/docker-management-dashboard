@@ -52,6 +52,12 @@ const initializeServer = () => {
     const message = await callback.unpauseContainer(containerId);
     res.json(message);
   });
+
+  app.get("/api/containers/:id/inspect", async (req, res) => {
+    const containerId = req.params.id;
+    const containerJson = await callback.inspectContainer(containerId);
+    res.json(containerJson);
+  });
   return app;
 };
 
