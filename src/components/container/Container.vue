@@ -12,7 +12,7 @@
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
           <additional-info v-bind:container="container"/>
-          <quick-actions/>
+          <quick-actions v-bind:id="container.Id"/>
         </v-flex>
       </v-layout>
     </v-container>

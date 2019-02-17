@@ -47,7 +47,55 @@
 </template>
 
 <script>
-export default {};
+import {
+  stopContainer,
+  deleteContainer,
+  pauseContainer,
+  unpauseContainer
+} from "../../services/ContainerService.js";
+
+export default {
+  props: ["id"],
+  methods: {
+    onStopContainer: async function() {
+      try {
+        const { data } = await stopContainer(this.id);
+        alert(data);
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    onRemoveContainer: async function() {
+      try {
+        const { data } = await deleteContainer(this.id);
+
+        alert(data);
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    onPauseContainer: async function() {
+      try {
+        const { data } = await pauseContainer(this.id);
+        alert(data);
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    onUnpauseContainer: async function() {
+      try {
+        const { data } = await unpauseContainer(this.id);
+        alert(data);
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+};
 </script>
 
 <style>
