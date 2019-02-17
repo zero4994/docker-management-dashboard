@@ -14,6 +14,15 @@ const allContainers = () => {
   });
 };
 
+const getContainerById = id => {
+  console.log(`Getting container with id ${id}...`);
+  return docker.listContainers({ all: true }).then(container => {
+    return container.filter(element => {
+      return element.Id === id;
+    });
+  });
+};
+
 const stopContainer = id => {
   console.log(`Stopping container with id: ${id}...`);
   const container = docker.getContainer(id);
@@ -95,6 +104,7 @@ const unpauseContainer = id => {
 module.exports = {
   allImages,
   allContainers,
+  getContainerById,
   stopContainer,
   createContainer,
   removeContainer,

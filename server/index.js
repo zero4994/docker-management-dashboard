@@ -18,6 +18,11 @@ const initializeServer = () => {
     res.json(containers);
   });
 
+  app.get("/api/containers/:id", async (req, res) => {
+    const container = await callback.getContainerById(req.params.id);
+    res.json(container);
+  });
+
   app.delete("/api/containers/:id/stop", async (req, res) => {
     const containerId = req.params.id;
     const message = await callback.stopContainer(containerId);
