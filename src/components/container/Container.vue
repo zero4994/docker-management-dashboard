@@ -24,6 +24,7 @@
 import Sidebar from "./Sidebar.vue";
 import AdditionalInfo from "./AdditionalInfo.vue";
 import QuickActions from "./QuickActions.vue";
+import { containerById } from "../../services/ContainerService.js";
 
 export default {
   components: {
@@ -31,9 +32,22 @@ export default {
     "additional-info": AdditionalInfo,
     "quick-actions": QuickActions
   },
-  props: ["container"],
+  data: () => ({
+    container: {}
+  }),
+  props: ["containerId"],
   mounted() {
-    console.log(this.container);
+    this.fetchContainer(this.containerId);
+  },
+  methods: {
+    fetchContainer: async function(id) {
+      try {
+        const { data } = await containerById(id);
+        this.container = data[0];
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 };
 </script>

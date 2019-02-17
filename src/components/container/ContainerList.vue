@@ -28,7 +28,7 @@
       </v-container>
     </div>
     <div v-else>
-      <docker-container v-bind:container="this.selectedContainer"/>
+      <docker-container v-bind:containerId="this.selectedId"/>
     </div>
   </div>
 </template>
@@ -50,7 +50,7 @@ export default {
   data: () => ({
     containers: [],
     currentView: "all",
-    selectedContainer: {}
+    selectedId: ""
   }),
   methods: {
     fetchAllContainers: async function() {
@@ -61,8 +61,9 @@ export default {
         console.error(error);
       }
     },
-    changeView: function(container) {
-      this.selectedContainer = container;
+    changeView: function(id) {
+      console.log("this is the id", id);
+      this.selectedId = id;
       this.currentView = "single";
     }
   }

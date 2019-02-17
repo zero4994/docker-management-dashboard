@@ -10,6 +10,16 @@ export const allContainers = () => {
   });
 };
 
+export const containerById = id => {
+  return axios({
+    method: "get",
+    url: `api/containers/${id}`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+};
+
 export const stopContainer = id => {
   return axios({
     method: "delete",
