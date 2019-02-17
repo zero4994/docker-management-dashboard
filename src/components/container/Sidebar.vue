@@ -27,13 +27,21 @@
     <v-list class="pt-0" dense>
       <v-divider light></v-divider>
 
-      <v-list-tile v-for="item in items" :key="item.title">
+      <v-list-tile @click="$emit('changeView', 'home')">
         <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon>dashboard</v-icon>
         </v-list-tile-action>
-
         <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          <v-list-tile-title>Home</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
+      <v-list-tile @click="$emit('changeView', 'inspect')">
+        <v-list-tile-action>
+          <v-icon>search</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Inspect</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -46,10 +54,6 @@ export default {
   data() {
     return {
       drawer: true,
-      items: [
-        { title: "Home", icon: "dashboard" },
-        { title: "About", icon: "question_answer" }
-      ],
       mini: true,
       right: true
     };

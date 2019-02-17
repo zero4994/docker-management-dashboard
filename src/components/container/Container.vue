@@ -1,12 +1,18 @@
 <template>
   <div>
-    <sidebar/>
+    <sidebar v-on:changeView="changeView"/>
     <v-container fluid grid-list-md id="workspace">
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
-          <v-card>
+          <v-card v-if="currentView === 'home'">
             <v-card-actions>
               <span class="headline">Hello World</span>
+            </v-card-actions>
+          </v-card>
+
+          <v-card v-if="currentView === 'inspect'">
+            <v-card-actions>
+              <span class="headline">Inspect</span>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -33,7 +39,8 @@ export default {
     "quick-actions": QuickActions
   },
   data: () => ({
-    container: {}
+    container: {},
+    currentView: "home"
   }),
   props: ["containerId"],
   mounted() {
@@ -47,6 +54,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    changeView: function(view) {
+      console.log(view);
+      this.currentView = view;
     }
   }
 };
