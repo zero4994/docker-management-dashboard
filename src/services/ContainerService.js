@@ -59,3 +59,13 @@ export const unpauseContainer = id => {
     }
   });
 };
+
+export const inspectContainer = id => {
+  return axios({
+    method: "get",
+    url: `/api/containers/${id}/inspect`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+};

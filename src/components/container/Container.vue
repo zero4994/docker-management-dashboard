@@ -9,12 +9,7 @@
               <span class="headline">Hello World</span>
             </v-card-actions>
           </v-card>
-
-          <v-card v-if="currentView === 'inspect'">
-            <v-card-actions>
-              <span class="headline">Inspect</span>
-            </v-card-actions>
-          </v-card>
+          <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id"/>
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
           <additional-info v-bind:container="container"/>
@@ -30,13 +25,15 @@
 import Sidebar from "./Sidebar.vue";
 import AdditionalInfo from "./AdditionalInfo.vue";
 import QuickActions from "./QuickActions.vue";
+import Inspect from "./Inspect.vue";
 import { containerById } from "../../services/ContainerService.js";
 
 export default {
   components: {
     sidebar: Sidebar,
     "additional-info": AdditionalInfo,
-    "quick-actions": QuickActions
+    "quick-actions": QuickActions,
+    inspect: Inspect
   },
   data: () => ({
     container: {},
