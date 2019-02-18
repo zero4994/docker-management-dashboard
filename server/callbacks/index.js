@@ -116,6 +116,14 @@ const inspectContainer = id => {
     });
 };
 
+const getContainerStats = id => {
+  console.log(`Getting stats for container with id ${id}`);
+  const container = docker.getContainer(id);
+  return container.stats({ stream: false }).then(stats => {
+    return stats;
+  });
+};
+
 module.exports = {
   allImages,
   allContainers,
@@ -125,5 +133,6 @@ module.exports = {
   removeContainer,
   pauseContainer,
   unpauseContainer,
-  inspectContainer
+  inspectContainer,
+  getContainerStats
 };
