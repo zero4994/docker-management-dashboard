@@ -61,7 +61,7 @@ export default {
       try {
         const { data } = await stopContainer(this.id);
         alert(data);
-        this.$emit("fetchAllContainers");
+        this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
       }
@@ -71,7 +71,7 @@ export default {
         const { data } = await deleteContainer(this.id);
 
         alert(data);
-        this.$emit("fetchAllContainers");
+        this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
       }
@@ -80,7 +80,7 @@ export default {
       try {
         const { data } = await pauseContainer(this.id);
         alert(data);
-        this.$emit("fetchAllContainers");
+        this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
       }
@@ -89,7 +89,7 @@ export default {
       try {
         const { data } = await unpauseContainer(this.id);
         alert(data);
-        this.$emit("fetchAllContainers");
+        this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
       }
