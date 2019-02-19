@@ -13,6 +13,7 @@
         rows="32"
         no-resize
         dark
+        id="textLogs"
       ></v-textarea>
     </v-card-actions>
   </v-card>
@@ -43,6 +44,8 @@ export default {
         const { data } = await getContainerLogs(id, lastUpdateTime);
         const logData = String(data.logs);
         this.logs = logData;
+        var textarea = document.getElementById("textLogs");
+        textarea.scrollTop = textarea.scrollHeight;
       } catch (error) {
         console.error(error);
       }

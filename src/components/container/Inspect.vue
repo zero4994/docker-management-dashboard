@@ -4,7 +4,7 @@
       <span class="headline">Inspect</span>
     </v-card-actions>
     <v-card-actions>
-      <v-textarea solo :auto-grow="true" name="input-7-1" v-model="container" disabled></v-textarea>
+      <v-textarea solo readonly v-model="container" class="fixed-heigth" rows="32" no-resize></v-textarea>
     </v-card-actions>
   </v-card>
 </template>
@@ -34,5 +34,9 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+.fixed-heigth {
+  height: 44rem;
+  resize: none;
+}
 </style>
