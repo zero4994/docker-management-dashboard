@@ -65,6 +65,12 @@ const initializeServer = () => {
     res.json(stats);
   });
 
+  app.get("/api/containers/:id/logs", async (req, res) => {
+    const containerId = req.params.id;
+    const logs = await callback.getContainerLogs(containerId);
+    res.json({ logs });
+  });
+
   return app;
 };
 

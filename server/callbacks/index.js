@@ -1,4 +1,5 @@
 const { docker } = require("../config");
+const axios = require("axios");
 
 const allImages = () => {
   console.log("Querying all images...");
@@ -124,6 +125,28 @@ const getContainerStats = id => {
   });
 };
 
+const getContainerLogs = async id => {
+  console.log(`Getting logs for container with id ${id}`);
+  try {
+    const { data } = await getLogsRaw(id);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const getLogsRaw = id => {
+  return axios({
+    socketPath: "/var/run/docker.sock",
+    url: `http:/v1.24/containers/${id}/logs`,
+    params: {
+      follow: false,
+      stdout: true,
+      stderr: true
+    },
+    method: "get"
+  });
+};
 module.exports = {
   allImages,
   allContainers,
@@ -134,5 +157,6 @@ module.exports = {
   pauseContainer,
   unpauseContainer,
   inspectContainer,
-  getContainerStats
+  getContainerStats,
+  getContainerLogs
 };
