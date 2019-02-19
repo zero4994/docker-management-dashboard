@@ -4,11 +4,8 @@
     <v-container fluid grid-list-md id="workspace">
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
-          <v-card v-if="currentView === 'home'">
-            <v-card-actions>
-              <span class="headline">Hello World</span>
-            </v-card-actions>
-          </v-card>
+          <stats v-if="currentView === 'home'"/>
+          <logs v-if="currentView === 'logs'" v-bind:id="this.containerId"/>
           <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id"/>
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
@@ -25,6 +22,8 @@
 import Sidebar from "./Sidebar.vue";
 import AdditionalInfo from "./AdditionalInfo.vue";
 import QuickActions from "./QuickActions.vue";
+import Stats from "./Stats.vue";
+import Logs from "./Logs.vue";
 import Inspect from "./Inspect.vue";
 import { containerById } from "../../services/ContainerService.js";
 
@@ -33,6 +32,8 @@ export default {
     sidebar: Sidebar,
     "additional-info": AdditionalInfo,
     "quick-actions": QuickActions,
+    stats: Stats,
+    logs: Logs,
     inspect: Inspect
   },
   data: () => ({
