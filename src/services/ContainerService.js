@@ -69,3 +69,13 @@ export const inspectContainer = id => {
     }
   });
 };
+
+export const getContainerLogs = id => {
+  return axios({
+    method: "get",
+    url: `/api/containers/${id}/logs`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+};
