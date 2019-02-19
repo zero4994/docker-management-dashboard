@@ -129,7 +129,6 @@ const getContainerLogs = async id => {
   console.log(`Getting logs for container with id ${id}`);
   try {
     const { data } = await getLogsRaw(id);
-    console.log("this is json data =>");
     //return JSON.parse(JSON.stringify(data.data));
     return String(data);
   } catch (error) {
