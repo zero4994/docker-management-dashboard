@@ -129,13 +129,16 @@ const getContainerLogs = async id => {
   console.log(`Getting logs for container with id ${id}`);
   try {
     const { data } = await getLogsRaw(id);
-    return data;
+    console.log("this is json data =>");
+    //return JSON.parse(JSON.stringify(data.data));
+    return String(data);
   } catch (error) {
-    console.error(error);
+    //console.error(error);
   }
 };
 
 const getLogsRaw = id => {
+  console.log(id);
   return axios({
     socketPath: "/var/run/docker.sock",
     url: `http:/v1.24/containers/${id}/logs`,
@@ -144,7 +147,10 @@ const getLogsRaw = id => {
       stdout: true,
       stderr: true
     },
-    method: "get"
+    method: "get",
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
 };
 module.exports = {

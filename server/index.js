@@ -68,6 +68,7 @@ const initializeServer = () => {
   app.get("/api/containers/:id/logs", async (req, res) => {
     const containerId = req.params.id;
     const logs = await callback.getContainerLogs(containerId);
+    console.log(logs);
     res.json({ logs });
   });
 
