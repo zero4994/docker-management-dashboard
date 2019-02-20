@@ -5,9 +5,6 @@
         <v-layout row wrap>
           <h1>Containers</h1>
           <v-spacer></v-spacer>
-          <v-btn color="cyan" dark @click="fetchAllContainers">Refresh
-            <v-icon>refresh</v-icon>
-          </v-btn>
         </v-layout>
       </v-container>
 
@@ -46,10 +43,14 @@ export default {
   mounted: function() {
     this.currentView = "all";
     this.fetchAllContainers();
+    this.interval = setInterval(() => {
+      this.fetchAllContainers();
+    }, 5000);
   },
   data: () => ({
     containers: [],
     currentView: "all",
+    interval: {},
     selectedId: ""
   }),
   methods: {
@@ -66,6 +67,10 @@ export default {
       this.selectedId = id;
       this.currentView = "single";
     }
+  },
+  beforeDestroy() {
+    console.log("clearing interval");
+    clearInterval(this.interval);
   }
 };
 </script>
