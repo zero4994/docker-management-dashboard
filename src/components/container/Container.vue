@@ -5,7 +5,11 @@
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
           <stats v-if="currentView === 'home'"/>
-          <logs v-if="currentView === 'logs'" v-bind:id="this.containerId"/>
+          <logs
+            v-if="currentView === 'logs'"
+            v-bind:id="this.containerId"
+            v-bind:socket="this.socket"
+          />
           <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id"/>
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
@@ -40,7 +44,7 @@ export default {
     container: {},
     currentView: "home"
   }),
-  props: ["containerId"],
+  props: ["containerId", "socket"],
   mounted() {
     this.fetchContainer(this.containerId);
   },

@@ -1,5 +1,6 @@
 const { docker } = require("../config");
 const axios = require("axios");
+const io = require("socket.io-client");
 
 const allImages = () => {
   console.log("Querying all images...");
@@ -125,15 +126,29 @@ const getContainerStats = id => {
   });
 };
 
-const getContainerLogs = async (id, lastUpdateTime) => {
-  console.log(`Getting logs for container with id ${id}`);
-  try {
-    const { data } = await getLogsRaw(id, lastUpdateTime);
-    //return JSON.parse(JSON.stringify(data.data));
-    return String(data);
-  } catch (error) {
-    //console.error(error);
-  }
+const getContainerLogs = async id => {
+  console.log("trying to start a socket");
+  const socket = io.connect("http://localhost:3000");
+  const container = docker.getContainer(id);
+  container.logs({ follow: true, stdout: true, stderr: true }).then(stream => {
+    demux(stream, socket);
+  });
+};
+
+const demux = (stream, socket) => {
+  var header = null;
+
+  stream.on("readable", function() {
+    header = header || stream.read(8);
+    while (header !== null) {
+      var payload = stream.read(header.readUInt32BE(4));
+      if (payload === null) break;
+      socket.emit("logs", {
+        message: payload.toString("utf8")
+      });
+      header = stream.read(8);
+    }
+  });
 };
 
 const getLogsRaw = (id, lastUpdateTime) => {
