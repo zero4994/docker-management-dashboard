@@ -43,9 +43,13 @@ export default {
       try {
         const { data } = await getContainerLogs(id, lastUpdateTime);
         const logData = String(data.logs);
-        this.logs = logData;
-        var textarea = document.getElementById("textLogs");
-        textarea.scrollTop = textarea.scrollHeight;
+        this.logs += logData;
+        this.lastUpdateTime = data.lastUpdateTime;
+
+        if (logData.length > 0) {
+          var textarea = document.getElementById("textLogs");
+          textarea.scrollTop = textarea.scrollHeight;
+        }
       } catch (error) {
         console.error(error);
       }

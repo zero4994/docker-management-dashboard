@@ -70,12 +70,15 @@ export const inspectContainer = id => {
   });
 };
 
-export const getContainerLogs = id => {
+export const getContainerLogs = (id, lastUpdateTime) => {
   return axios({
     method: "get",
     url: `/api/containers/${id}/logs`,
     headers: {
       "Content-Type": "application/json"
+    },
+    params: {
+      lastUpdateTime
     }
   });
 };
