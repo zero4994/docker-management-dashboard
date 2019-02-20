@@ -125,10 +125,10 @@ const getContainerStats = id => {
   });
 };
 
-const getContainerLogs = async id => {
+const getContainerLogs = async (id, lastUpdateTime) => {
   console.log(`Getting logs for container with id ${id}`);
   try {
-    const { data } = await getLogsRaw(id);
+    const { data } = await getLogsRaw(id, lastUpdateTime);
     //return JSON.parse(JSON.stringify(data.data));
     return String(data);
   } catch (error) {
@@ -136,16 +136,18 @@ const getContainerLogs = async id => {
   }
 };
 
-const getLogsRaw = id => {
-  console.log(id);
+const getLogsRaw = (id, lastUpdateTime) => {
+  const params = {
+    follow: false,
+    stdout: true,
+    stderr: true,
+    since: lastUpdateTime
+  };
+
   return axios({
     socketPath: "/var/run/docker.sock",
     url: `http:/v1.24/containers/${id}/logs`,
-    params: {
-      follow: false,
-      stdout: true,
-      stderr: true
-    },
+    params,
     method: "get",
     headers: {
       "Content-Type": "application/json"
