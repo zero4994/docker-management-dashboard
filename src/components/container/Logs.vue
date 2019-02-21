@@ -19,7 +19,6 @@
   </v-card>
 </template>
 
-
 <script>
 import { getContainerLogs } from "../../services/ContainerService.js";
 export default {
@@ -54,7 +53,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 .fixed-heigth {

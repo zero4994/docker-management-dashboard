@@ -1,26 +1,28 @@
 <template>
   <div>
-    <sidebar v-on:changeView="changeView"/>
+    <sidebar v-on:changeView="changeView" />
     <v-container fluid grid-list-md id="workspace">
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
-          <stats v-if="currentView === 'home'"/>
+          <stats v-if="currentView === 'home'" />
           <logs
             v-if="currentView === 'logs'"
             v-bind:id="this.containerId"
             v-bind:socket="this.socket"
           />
-          <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id"/>
+          <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id" />
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
-          <additional-info v-bind:container="container"/>
-          <quick-actions v-bind:id="container.Id" v-on:fetchContainer="this.fetchContainer"/>
+          <additional-info v-bind:container="container" />
+          <quick-actions
+            v-bind:id="container.Id"
+            v-on:fetchContainer="this.fetchContainer"
+          />
         </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
-
 
 <script>
 import Sidebar from "./Sidebar.vue";
@@ -64,7 +66,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 #workspace {

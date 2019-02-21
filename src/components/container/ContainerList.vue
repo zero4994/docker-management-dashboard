@@ -25,13 +25,15 @@
       </v-container>
     </div>
     <div v-else>
-      <docker-container v-bind:containerId="this.selectedId" v-bind:socket="this.socket"/>
+      <docker-container
+        v-bind:containerId="this.selectedId"
+        v-bind:socket="this.socket"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import ContainerPreview from "./ContainerPreview.vue";
 import Container from "./Container.vue";
 import { allContainers } from "../../services/ContainerService.js";
@@ -76,5 +78,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

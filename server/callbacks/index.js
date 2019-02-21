@@ -1,5 +1,4 @@
 const { docker } = require("../config");
-const axios = require("axios");
 const io = require("socket.io-client");
 
 const allImages = () => {
@@ -131,11 +130,11 @@ const getContainerLogs = async id => {
   const socket = io.connect("http://localhost:3000");
   const container = docker.getContainer(id);
   container.logs({ follow: true, stdout: true, stderr: true }).then(stream => {
-    demux(stream, socket);
+    readStream(stream, socket);
   });
 };
 
-const demux = (stream, socket) => {
+const readStream = (stream, socket) => {
   var header = null;
 
   stream.on("readable", function() {
@@ -151,24 +150,6 @@ const demux = (stream, socket) => {
   });
 };
 
-const getLogsRaw = (id, lastUpdateTime) => {
-  const params = {
-    follow: false,
-    stdout: true,
-    stderr: true,
-    since: lastUpdateTime
-  };
-
-  return axios({
-    socketPath: "/var/run/docker.sock",
-    url: `http:/v1.24/containers/${id}/logs`,
-    params,
-    method: "get",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-};
 module.exports = {
   allImages,
   allContainers,

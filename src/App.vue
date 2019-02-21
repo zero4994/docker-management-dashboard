@@ -1,9 +1,9 @@
 <template>
   <v-app id="app">
-    <navbar v-on:changeView="changeView"/>
+    <navbar v-on:changeView="changeView" />
     <v-content>
-      <images-list v-if="this.currentView === 'Images'"/>
-      <containers-list v-else v-bind:socket="socket"/>
+      <images-list v-if="this.currentView === 'Images'" />
+      <containers-list v-else v-bind:socket="socket" />
     </v-content>
   </v-app>
 </template>

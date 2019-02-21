@@ -4,11 +4,17 @@
       <span class="headline">Inspect</span>
     </v-card-actions>
     <v-card-actions>
-      <v-textarea solo readonly v-model="container" class="fixed-heigth" rows="32" no-resize></v-textarea>
+      <v-textarea
+        solo
+        readonly
+        v-model="container"
+        class="fixed-heigth"
+        rows="32"
+        no-resize
+      ></v-textarea>
     </v-card-actions>
   </v-card>
 </template>
-
 
 <script>
 import { inspectContainer } from "../../services/ContainerService.js";
@@ -32,7 +38,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .fixed-heigth {

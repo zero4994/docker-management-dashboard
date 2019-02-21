@@ -9,7 +9,7 @@
         block
         dark
         v-on:click="$emit('changeView', image)"
-      >CREATE CONTAINER
+        >CREATE CONTAINER
         <v-icon>add_circle</v-icon>
       </v-btn>
     </v-card>
@@ -21,7 +21,6 @@ export default {
   props: ["image"]
 };
 </script>
-
 
 <style>
 .card {

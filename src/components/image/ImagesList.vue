@@ -5,7 +5,8 @@
         <v-layout row wrap>
           <h1>Images</h1>
           <v-spacer></v-spacer>
-          <v-btn color="cyan" dark @click="fetchAllImages">Refresh
+          <v-btn color="cyan" dark @click="fetchAllImages"
+            >Refresh
             <v-icon>refresh</v-icon>
           </v-btn>
         </v-layout>
@@ -13,19 +14,22 @@
 
       <v-container fluid grid-list-md>
         <v-layout row wrap>
-          <v-flex v-for="image in this.images" :key="image.Id" v-bind="{ [`md6`]: true }">
-            <docker-image v-bind:image="image" v-on:changeView="changeView"/>
+          <v-flex
+            v-for="image in this.images"
+            :key="image.Id"
+            v-bind="{ [`md6`]: true }"
+          >
+            <docker-image v-bind:image="image" v-on:changeView="changeView" />
           </v-flex>
         </v-layout>
       </v-container>
     </div>
 
     <div v-else>
-      <docker-image-expanded v-bind:image="this.selectedImage"/>
+      <docker-image-expanded v-bind:image="this.selectedImage" />
     </div>
   </div>
 </template>
-
 
 <script>
 import { allImages } from "../../services/ImageService.js";
@@ -63,6 +67,4 @@ export default {
 };
 </script>
 
-
-<style>
-</style>
+<style></style>

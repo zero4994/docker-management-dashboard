@@ -3,49 +3,57 @@
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>ID</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.image.Id}}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{ this.image.Id }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>Created</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.image.Created}}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{ this.image.Created }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>Labels</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.image.Label}}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{ this.image.Label }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>ParentId</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.image.ParentId}}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{ this.image.ParentId }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>RepoDigests</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.image.RepoDigests}}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{
+          this.image.RepoDigests
+        }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>SharedSize</v-list-tile-title>
-        <v-list-tile-sub-title>{{this.image.SharedSize}}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{
+          this.image.SharedSize
+        }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>Size</v-list-tile-title>
-        <v-list-tile-sub-title>{{ this.bytesToSize(this.image.Size) }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{
+          this.bytesToSize(this.image.Size)
+        }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>VirtualSize</v-list-tile-title>
-        <v-list-tile-sub-title>{{ this.bytesToSize(this.image.VirtualSize) }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{
+          this.bytesToSize(this.image.VirtualSize)
+        }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
 
@@ -85,5 +93,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

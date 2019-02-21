@@ -9,7 +9,9 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat @click="$emit('changeView', 'Images')">Images</v-btn>
-        <v-btn flat @click="$emit('changeView', 'Containers')">Containers</v-btn>
+        <v-btn flat @click="$emit('changeView', 'Containers')"
+          >Containers</v-btn
+        >
       </v-toolbar-items>
     </v-toolbar>
   </nav>
@@ -19,5 +21,4 @@
 export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

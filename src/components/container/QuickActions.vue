@@ -6,7 +6,8 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="red darken-3" dark block @click="onStopContainer">STOP
+        <v-btn color="red darken-3" dark block @click="onStopContainer"
+          >STOP
           <v-icon>stop</v-icon>
         </v-btn>
       </v-flex>
@@ -16,7 +17,8 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="yellow darken-1" dark block @click="onPauseContainer">PAUSE
+        <v-btn color="yellow darken-1" dark block @click="onPauseContainer"
+          >PAUSE
           <v-icon>pause</v-icon>
         </v-btn>
       </v-flex>
@@ -26,7 +28,12 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="light-green lighten-1" dark block @click="onUnpauseContainer">UNPAUSE
+        <v-btn
+          color="light-green lighten-1"
+          dark
+          block
+          @click="onUnpauseContainer"
+          >UNPAUSE
           <v-icon>play_arrow</v-icon>
         </v-btn>
       </v-flex>
@@ -98,5 +105,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
