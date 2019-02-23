@@ -15,4 +15,21 @@ const parsePorts = ports => {
   return portBind;
 };
 
-module.exports = { containerObjectParser };
+const readStream = (stream, socket, id) => {
+  var header = null;
+
+  stream.on("readable", () => {
+    header = header || stream.read(8);
+    while (header !== null) {
+      var payload = stream.read(header.readUInt32BE(4));
+      if (payload === null) break;
+      socket.emit("logs", {
+        id,
+        message: payload.toString("utf8")
+      });
+      header = stream.read(8);
+    }
+  });
+};
+
+module.exports = { containerObjectParser, readStream };

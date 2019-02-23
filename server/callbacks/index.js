@@ -1,5 +1,6 @@
 const { docker } = require("../config");
 const io = require("socket.io-client");
+const { readStream } = require("../utils/container");
 
 const allImages = () => {
   console.log("Querying all images...");
@@ -131,23 +132,6 @@ const getContainerLogs = async id => {
   const container = docker.getContainer(id);
   container.logs({ follow: true, stdout: true, stderr: true }).then(stream => {
     readStream(stream, socket, id);
-  });
-};
-
-const readStream = (stream, socket, id) => {
-  var header = null;
-
-  stream.on("readable", () => {
-    header = header || stream.read(8);
-    while (header !== null) {
-      var payload = stream.read(header.readUInt32BE(4));
-      if (payload === null) break;
-      socket.emit("logs", {
-        id,
-        message: payload.toString("utf8")
-      });
-      header = stream.read(8);
-    }
   });
 };
 
