@@ -24,28 +24,22 @@ import { getContainerLogs } from "../../services/ContainerService.js";
 export default {
   props: ["id", "socket"],
   data: () => ({
-    logs: "",
-    interval: {},
-    lastUpdateTime: 0
+    logs: ""
   }),
   mounted() {
     this.socket.on(this.id, message => {
       this.logs += message;
-      if (message.length > 0) {
-        var textarea = document.getElementById("textLogs");
+      let textarea = document.getElementById("textLogs");
+      if (textarea) {
         textarea.scrollTop = textarea.scrollHeight;
       }
     });
-    this.getLogs(this.id, this.lastUpdateTime);
-  },
-  beforeDestroy() {
-    console.log("clearing interval");
-    clearInterval(this.interval);
+    this.getLogs(this.id);
   },
   methods: {
-    getLogs: async function(id, lastUpdateTime) {
+    getLogs: async function(id) {
       try {
-        await getContainerLogs(id, lastUpdateTime);
+        await getContainerLogs(id);
       } catch (error) {
         console.error(error);
       }
