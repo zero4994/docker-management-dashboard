@@ -29,9 +29,9 @@ export default {
     lastUpdateTime: 0
   }),
   mounted() {
-    this.socket.on("logs", data => {
-      this.logs += data.message;
-      if (data.message.length > 0) {
+    this.socket.on(this.id, message => {
+      this.logs += message;
+      if (message.length > 0) {
         var textarea = document.getElementById("textLogs");
         textarea.scrollTop = textarea.scrollHeight;
       }
