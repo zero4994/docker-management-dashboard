@@ -68,6 +68,7 @@ const createContainer = container => {
     })
     .catch(error => {
       console.log("===>Container id", containerId);
+      console.error("Error:", error);
       console.error("Error:", error.json.message);
       return `Container created with id: ${containerId}
              

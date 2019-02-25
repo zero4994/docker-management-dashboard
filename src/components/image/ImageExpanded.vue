@@ -11,8 +11,26 @@
         <v-flex v-bind="{ [`md8`]: true }">
           <v-card>
             <v-card-actions>
-              <span class="headline">Container</span>
+              <span class="headline">Container options</span>
             </v-card-actions>
+
+            <v-tabs color="dark blue" dark slider-color="yellow">
+              <v-tab ripple @click="changeTab('normal')">Normal</v-tab>
+              <v-tab ripple @click="changeTab('raw')">Raw</v-tab>
+
+              <v-tab-item>
+                <v-card flat>
+                  <v-card-text>This is where the options go</v-card-text>
+                </v-card>
+              </v-tab-item>
+
+              <v-tab-item>
+                <v-card>
+                  <v-textarea solo v-model="rawOptions" rows="20" no-resize></v-textarea>
+                </v-card>
+              </v-tab-item>
+            </v-tabs>
+
             <v-btn color="yellow accent-4" @click="startContainer">START CONTAINER
               <v-icon>play_arrow</v-icon>
             </v-btn>
@@ -42,14 +60,26 @@ export default {
   },
   data: () => ({
     hostPort: "",
-    localPort: ""
+    localPort: "",
+    rawOptions: "",
+    currentTab: "normal"
   }),
-  mounted() {
-    console.log(this.image);
-  },
   methods: {
+    changeTab: function(view) {
+      this.currentTab = view;
+    },
     startContainer: async function() {
       try {
+        let containerOptions;
+        if (this.currentTab === "raw") {
+          containerOptions = JSON.parse(this.rawOptions);
+          containerOptions.Image = this.image.RepoTags[0];
+        } else {
+          containerOptions = {
+            Image: this.image.RepoTags[0]
+          };
+        }
+
         console.log("starting container");
         const { data } = await axios({
           method: "post",
@@ -57,9 +87,7 @@ export default {
           headers: {
             "Content-Type": "application/json"
           },
-          data: JSON.stringify({
-            Image: this.image.RepoTags[0]
-          })
+          data: JSON.stringify(containerOptions)
         });
         console.log("====>", data);
         alert(data);

@@ -13,7 +13,7 @@
           <v-flex
             v-for="container in this.containers"
             :key="container.Id"
-            v-bind="{ [`md6`]: true }"
+            v-bind="{ [`md4`]: true }"
           >
             <docker-container-preview
               v-bind:container="container"
@@ -25,10 +25,7 @@
       </v-container>
     </div>
     <div v-else>
-      <docker-container
-        v-bind:containerId="this.selectedId"
-        v-bind:socket="this.socket"
-      />
+      <docker-container v-bind:containerId="this.selectedId" v-bind:socket="this.socket"/>
     </div>
   </div>
 </template>
