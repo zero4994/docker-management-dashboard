@@ -2,7 +2,7 @@
   <div>
     <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <h2>{{ this.image.RepoTags }}</h2>
+        <h2>{{ this.image.RepoTags[0] }}</h2>
       </v-layout>
     </v-container>
 
@@ -13,8 +13,7 @@
             <v-card-actions>
               <span class="headline">Container</span>
             </v-card-actions>
-            <v-btn color="yellow accent-4" @click="startContainer"
-              >START CONTAINER
+            <v-btn color="yellow accent-4" @click="startContainer">START CONTAINER
               <v-icon>play_arrow</v-icon>
             </v-btn>
           </v-card>
@@ -24,7 +23,7 @@
             <v-card-actions>
               <span class="headline">Additional Info</span>
             </v-card-actions>
-            <image-additional-info v-bind:image="image" />
+            <image-additional-info v-bind:image="image"/>
           </v-card>
         </v-flex>
       </v-layout>
