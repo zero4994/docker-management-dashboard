@@ -12,7 +12,7 @@
           <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id"/>
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
-          <additional-info v-bind:container="container"/>
+          <additional-info v-bind:container="container" v-on:fetchContainer="this.fetchContainer"/>
           <quick-actions
             v-bind:id="container.Id"
             v-on:fetchContainer="this.fetchContainer"

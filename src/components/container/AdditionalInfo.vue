@@ -15,7 +15,7 @@
           <v-list-tile-title>Created</v-list-tile-title>
           <v-list-tile-sub-title>
             {{
-            this.container.Created
+            this.created
             }}
           </v-list-tile-sub-title>
         </v-list-tile-content>
@@ -78,13 +78,21 @@
 import moment from "moment";
 export default {
   props: ["container"],
-  computed: {
-    millis: function() {
-      const millis = Number(this.container.Created) * 1000;
-      const date = new Date(millis);
-      console.log("this is the moment test ==>", millis);
-      return 0;
-    }
+  data: () => ({
+    created: "",
+    interval: {}
+  }),
+  mounted() {
+    this.interval = setInterval(() => {
+      this.$emit("fetchContainer", this.container.Id);
+    }, 5000);
+  },
+  updated() {
+    const millis = Number(this.container.Created) * 1000;
+    this.created = moment(millis).fromNow();
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   }
 };
 </script>
