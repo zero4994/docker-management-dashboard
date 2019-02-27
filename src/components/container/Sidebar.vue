@@ -27,15 +27,6 @@
     <v-list class="pt-0" dense>
       <v-divider light></v-divider>
 
-      <v-list-tile @click="$emit('changeView', 'home')">
-        <v-list-tile-action>
-          <v-icon>dashboard</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Home</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-
       <v-list-tile @click="$emit('changeView', 'logs')">
         <v-list-tile-action>
           <v-icon>history</v-icon>
