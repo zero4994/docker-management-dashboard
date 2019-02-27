@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-card-actions>
-        <span class="headline">{{ image.RepoTags[0] }}</span>
+        <span class="headline">{{ image.RepoTags[0].split(":")[0] }}</span>
       </v-card-actions>
       <v-btn
         color="green lighten-2"

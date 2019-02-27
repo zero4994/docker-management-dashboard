@@ -2,7 +2,7 @@
   <div>
     <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <h2>{{ this.image.RepoTags[0] }}</h2>
+        <h2>{{ this.image.RepoTags[0].split(":")[0] }}</h2>
       </v-layout>
     </v-container>
 
@@ -11,7 +11,21 @@
         <v-flex v-bind="{ [`md8`]: true }">
           <v-card>
             <v-card-actions>
-              <span class="headline">Container options</span>
+              <v-layout row wrap>
+                <v-flex v-bind="{ [`md8`]: true }">
+                  <span class="headline">Container options</span>
+                </v-flex>
+                <v-flex v-bind="{ [`md4`]: true }">
+                  <v-select
+                    :items="versions"
+                    label="Version"
+                    outline
+                    @change="changeSelectedVersion"
+                    v-bind:error="isError"
+                    v-bind:error-messages="errorMessages"
+                  ></v-select>
+                </v-flex>
+              </v-layout>
             </v-card-actions>
 
             <v-tabs color="dark blue" dark slider-color="yellow">
@@ -62,23 +76,36 @@ export default {
     hostPort: "",
     localPort: "",
     rawOptions: "",
-    currentTab: "normal"
+    currentTab: "normal",
+    versions: [],
+    selectedVersion: "",
+    errorMessages: [],
+    isError: false
   }),
+  mounted() {
+    this.versions = this.image.RepoTags.map(tag => {
+      return tag.split(":")[1];
+    });
+  },
   methods: {
     changeTab: function(view) {
       this.currentTab = view;
     },
     startContainer: async function() {
       try {
-        let containerOptions;
+        if (this.selectedVersion === "") {
+          this.isError = true;
+          this.errorMessages = "Version must be selected";
+          return;
+        }
+
+        let containerOptions = {};
         if (this.currentTab === "raw") {
           containerOptions = JSON.parse(this.rawOptions);
-          containerOptions.Image = this.image.RepoTags[0];
-        } else {
-          containerOptions = {
-            Image: this.image.RepoTags[0]
-          };
         }
+        containerOptions.Image = `${this.image.RepoTags[0].split(":")[0]}:${
+          this.selectedVersion
+        }`;
 
         console.log("starting container");
         const { data } = await axios({
@@ -94,6 +121,11 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    changeSelectedVersion(selected) {
+      this.isError = false;
+      this.errorMessages = "";
+      this.selectedVersion = selected;
     }
   }
 };
