@@ -47,10 +47,19 @@
 
       <v-list-tile @click="$emit('changeView', 'inspect')">
         <v-list-tile-action>
-          <v-icon>search</v-icon>
+          <v-icon>zoom_in</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>Inspect</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
+      <v-list-tile @click="$emit('changeView', 'allContainers')">
+        <v-list-tile-action>
+          <v-icon>keyboard_return</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Return</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>

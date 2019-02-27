@@ -4,7 +4,7 @@
       <v-card-actions>
         <span class="headline">{{ container.Image }}</span>
         <v-spacer></v-spacer>
-        <v-btn color="indigo" dark @click="$emit('changeView', container.Id)">
+        <v-btn color="indigo" dark @click="$emit('changeView', container.Id, 'single')">
           <v-icon>open_in_new</v-icon>
         </v-btn>
       </v-card-actions>

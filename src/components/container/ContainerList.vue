@@ -25,7 +25,11 @@
       </v-container>
     </div>
     <div v-else>
-      <docker-container v-bind:containerId="this.selectedId" v-bind:socket="this.socket"/>
+      <docker-container
+        v-bind:containerId="this.selectedId"
+        v-bind:socket="this.socket"
+        v-on:changeView="changeView"
+      />
     </div>
   </div>
 </template>
@@ -62,10 +66,10 @@ export default {
         console.error(error);
       }
     },
-    changeView: function(id) {
-      console.log("this is the id", id);
+    changeView: function(id, view) {
+      console.log("this is the id", id, view);
       this.selectedId = id;
-      this.currentView = "single";
+      this.currentView = view;
     }
   },
   beforeDestroy() {
@@ -75,8 +79,5 @@ export default {
 };
 </script>
 
-<style scoped>
-body {
-  background-color: black;
-}
+<style>
 </style>
