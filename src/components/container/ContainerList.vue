@@ -68,6 +68,9 @@ export default {
     },
     changeView: function(id, view) {
       console.log("this is the id", id, view);
+      if (view === "all") {
+        this.fetchAllContainers();
+      }
       this.selectedId = id;
       this.currentView = view;
     }
