@@ -13,7 +13,6 @@ Docker Managemenet Dashboard is a simple in browser SPA to manage your local doc
 Its built using the following technologies:
 
 - Vue JS
-- GraphQL
 - [Docker](https://www.docker.com/)
 - Node
 - Express
@@ -53,6 +52,14 @@ Once the application starts the dashboard is available in **http://localhost:300
     <img align="center" height="90%" width="90%" src="img/d-overview.png"> 
 </p> 
 <br><br>
+
+### Starting Container
+
+The image screen can take a JSON Object as an input for the container's initial conditions. The definitions of the properties of the JSON Object can be found [here](https://docs.docker.com/engine/api/v1.37/#operation/ContainerCreate)
+
+<p align="center">
+    <img align="center" height="90%" width="90%" src="img/createContainer.png"> 
+</p>
 
 ## Contribution
 
