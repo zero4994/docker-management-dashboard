@@ -29,14 +29,7 @@
             </v-card-actions>
 
             <v-tabs color="dark blue" dark slider-color="yellow">
-              <v-tab ripple @click="changeTab('normal')">Normal</v-tab>
               <v-tab ripple @click="changeTab('raw')">Raw</v-tab>
-
-              <v-tab-item>
-                <v-card flat>
-                  <v-card-text>This is where the options go</v-card-text>
-                </v-card>
-              </v-tab-item>
 
               <v-tab-item>
                 <v-card>
@@ -76,7 +69,7 @@ export default {
     hostPort: "",
     localPort: "",
     rawOptions: "",
-    currentTab: "normal",
+    currentTab: "raw",
     versions: [],
     selectedVersion: "",
     errorMessages: [],
