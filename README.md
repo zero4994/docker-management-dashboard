@@ -61,6 +61,26 @@ The image screen can take a JSON Object as an input for the container's initial 
     <img align="center" height="90%" width="90%" src="img/createContainer.png"> 
 </p>
 
+### Managing Containers
+
+The Docker Management Dashboar can perform basic operations to container "at glance"
+
+<p align="center">
+    <img align="center" height="90%" width="90%" src="img/d-container-overview.png"> 
+</p>
+
+When a container is expanded the user can view the logs as well as perform quick actions
+
+<p align="center">
+    <img align="center" height="90%" width="90%" src="img/d-logs.png"> 
+</p>
+
+Containers can be inspected as well
+
+<p align="center">
+    <img align="center" height="90%" width="90%" src="img/d-inspect.png"> 
+</p>
+
 ## Contribution
 
 Feel free to fork and contribute to this project
