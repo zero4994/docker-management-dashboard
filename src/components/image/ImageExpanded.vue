@@ -93,7 +93,7 @@ export default {
         }
 
         let containerOptions = {};
-        if (this.currentTab === "raw") {
+        if (this.currentTab === "raw" && this.rawOptions.length > 0) {
           containerOptions = JSON.parse(this.rawOptions);
         }
         containerOptions.Image = `${this.image.RepoTags[0].split(":")[0]}:${
