@@ -8,15 +8,36 @@ A management dashboard for your local docker containers
     <img align="center" src="img/docker.png"> 
 </p> 
 <br><br>
-Docker Managemenet Dashboard is a simple in browser SPA to manage your local docker containers in a friendly and interactive way without having to deal with the docker CLI.
+
+## Overview
+
+Docker Managemenet Dashboard is a simple page application to manage your local docker containers in a friendly and interactive way without having to deal with the docker CLI.
+
+It allows you to do the following operations:
+
+- Start
+- Stop
+- Pause
+- Unpause
+- Remove
+- Inspect
+- Get Logs
+
+## Architecture
 
 Its built using the following technologies:
 
 - Vue JS
-- [Docker](https://www.docker.com/)
+- Vuetify
 - Node
 - Express
+- [Socket.IO](https://socket.io/)
+- [Docker](httpsos://www.docker.com/)
 - [Dockerode](https://github.com/apocas/dockerode.git)
+
+<p align="center">
+    <img align="center" height="90%" width="90%" src="img/architecture.png">
+</p>
 
 ## SetUp
 
