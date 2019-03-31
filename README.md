@@ -32,7 +32,7 @@ Its built using the following technologies:
 - Node
 - Express
 - [Socket.IO](https://socket.io/)
-- [Docker](httpsos://www.docker.com/)
+- [Docker](https://www.docker.com/)
 - [Dockerode](https://github.com/apocas/dockerode.git)
 
 <p align="center">
