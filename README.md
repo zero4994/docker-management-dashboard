@@ -53,7 +53,7 @@ Execute yarn to initialize
 yarn install
 ```
 
-Build the repo
+Build
 
 ```bash
 yarn build
