@@ -12,7 +12,7 @@
 import Navbar from "./components/Navbar.vue";
 import ImagesList from "./components/image/ImagesList.vue";
 import ContainerList from "./components/container/ContainerList.vue";
-const io = require("socket.io-client");
+// const io = require("socket.io-client");
 
 export default {
   name: "App",
@@ -22,17 +22,17 @@ export default {
     "containers-list": ContainerList
   },
   data: () => ({
-    currentView: "Images",
-    socket: {}
+    currentView: "Images"
+    // socket: {}
   }),
   methods: {
     changeView: function(value) {
       this.currentView = value;
     }
-  },
-  mounted() {
-    this.socket = io.connect("localhost:3000");
   }
+  // mounted() {
+  //   this.socket = io.connect("localhost:3000");
+  // }
 };
 </script>
 

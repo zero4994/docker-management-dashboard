@@ -1,11 +1,8 @@
-import axios from "axios";
+import { docker } from "./config";
 
-export const allImages = () => {
-  return axios({
-    method: "get",
-    url: "api/images",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const allImages = async () => {
+  console.log("Querying all images...");
+  const images = await docker.listImages({ all: false });
+  console.log("Images: ", images);
+  return images;
 };

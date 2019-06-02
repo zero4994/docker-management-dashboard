@@ -5,7 +5,8 @@
         <v-layout row wrap>
           <h1>Images</h1>
           <v-spacer></v-spacer>
-          <v-btn color="cyan" dark @click="fetchAllImages">Refresh
+          <v-btn color="cyan" dark @click="fetchAllImages">
+            Refresh
             <v-icon>refresh</v-icon>
           </v-btn>
         </v-layout>
@@ -46,13 +47,7 @@ export default {
   }),
   methods: {
     fetchAllImages: async function() {
-      try {
-        const { data } = await allImages();
-        console.log(data);
-        this.images = data;
-      } catch (error) {
-        console.error(error);
-      }
+      this.images = await allImages();
     },
     changeView: function(image) {
       this.currentView = "single";
