@@ -61,3 +61,5 @@ typings/
 .next
 /dist
 /server/deprecated
+#Electron-builder output
+/dist_electron
