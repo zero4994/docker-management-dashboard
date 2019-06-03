@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-card-actions>
-        <span class="headline">{{ container.Image }}</span>
+        <span class="title">{{ container.Image }}</span>
         <v-spacer></v-spacer>
         <v-btn color="indigo" dark @click="$emit('changeView', container.Id, 'single')">
           <v-icon>open_in_new</v-icon>
@@ -41,21 +41,30 @@
         </v-list-tile>
       </v-list>
 
-      <v-card-actions class="justify-center">
-        <v-btn color="red darken-3" dark @click="onStopContainer">STOP
-          <v-icon>stop</v-icon>
-        </v-btn>
-        <v-btn color="yellow darken-1" dark @click="onPauseContainer">PAUSE
-          <v-icon>pause</v-icon>
-        </v-btn>
-        <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">UNPAUSE
-          <v-icon>play_arrow</v-icon>
-        </v-btn>
-        <v-btn color="grey darken-4" dark @click="onRemoveContainer">
-          REMOVE
-          <i class="fas fa-trash-alt"></i>
-        </v-btn>
-      </v-card-actions>
+      <v-container>
+        <v-layout>
+          <v-flex>
+            <v-btn color="red darken-3" dark @click="onStopContainer">
+              <v-icon>stop</v-icon>
+            </v-btn>
+          </v-flex>
+          <!-- <v-flex>
+            <v-btn color="yellow darken-1" dark @click="onPauseContainer">
+              <v-icon>pause</v-icon>
+            </v-btn>
+          </v-flex>-->
+          <v-flex>
+            <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">
+              <v-icon>play_arrow</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex>
+            <v-btn color="grey darken-4" dark @click="onRemoveContainer">
+              <i class="fas fa-trash-alt"></i>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
   </div>
 </template>

@@ -104,6 +104,7 @@ export default {
         createContainer.bind(this)(containerOptions);
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error(error.toString(), { position: "top" });
       }
     },
     changeSelectedVersion(selected) {
