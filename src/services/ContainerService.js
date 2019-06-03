@@ -39,21 +39,35 @@ export const containerById = id => {
   });
 };
 
-export const stopContainer = id => {
-  return axios({
-    method: "delete",
-    url: `/api/containers/${id}/stop`,
-    headers: {
-      "Content-Type": "application/json"
+export const stopContainer = async function(id) {
+  try {
+    console.log(`Stopping container with id: ${id}...`);
+    const container = await docker.getContainer(id);
+    const response = await container.stop();
+
+    if (typeof respose !== "undefined") {
+      throw new Error(response);
     }
-  });
+
+    this.$dialog.message.success("Container successfully stopped", {
+      position: "top"
+    });
+  } catch (error) {
+    console.error(error);
+    this.$dialog.message.error(error.toString(), { position: "top" });
+  }
 };
 
 export const deleteContainer = async function(id, force = true) {
   try {
     console.log(`Removing container with id: ${id}...`);
     const container = await docker.getContainer(id);
-    await container.remove({ force });
+    const response = await container.remove({ force });
+
+    if (typeof respose !== "undefined") {
+      throw new Error(response);
+    }
+
     this.$dialog.message.success("Container removed", { position: "top" });
   } catch (error) {
     console.error(error);
