@@ -49,14 +49,16 @@ export const stopContainer = id => {
   });
 };
 
-export const deleteContainer = id => {
-  return axios({
-    method: "delete",
-    url: `/api/containers/${id}/remove`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const deleteContainer = async function(id, force = true) {
+  try {
+    console.log(`Removing container with id: ${id}...`);
+    const container = await docker.getContainer(id);
+    await container.remove({ force });
+    this.$dialog.message.success("Container removed", { position: "top" });
+  } catch (error) {
+    console.error(error);
+    this.$dialog.message.error(error.toString(), { position: "top" });
+  }
 };
 
 export const pauseContainer = id => {
