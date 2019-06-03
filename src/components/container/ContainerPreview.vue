@@ -104,21 +104,28 @@ export default {
       this.$emit("fetchAllContainers");
     },
     onRemoveContainer: async function() {
-      const forceRemove = await this.$dialog.confirm({
-        text: "Do you want to force remove the container?",
-        title: "Remove Container",
-        actions: {
-          false: "No",
-          true: "Yes"
-        }
-      });
+      try {
+        const forceRemove = await this.$dialog.confirm({
+          text: "Do you want to force remove the container?",
+          title: "Remove Container",
+          actions: {
+            false: "No",
+            true: "Yes"
+          }
+        });
 
-      if (typeof forceRemove === "undefined") {
-        return;
+        if (typeof forceRemove === "undefined") {
+          return;
+        }
+        this.isDisabled = true;
+        await deleteContainer.bind(this)(this.container.Id, forceRemove);
+        this.$emit("fetchAllContainers");
+        this.$dialog.message.success("Container removed", { position: "top" });
+      } catch (error) {
+        console.error(error);
+        this.isDisabled = false;
+        this.$dialog.message.error(error.toString(), { position: "top" });
       }
-      this.isDisabled = true;
-      deleteContainer.bind(this)(this.container.Id + "dd", forceRemove);
-      this.$emit("fetchAllContainers");
     },
     onUnpauseContainer: async function() {
       try {
