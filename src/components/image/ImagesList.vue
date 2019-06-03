@@ -47,7 +47,7 @@ export default {
   }),
   methods: {
     fetchAllImages: async function() {
-      this.images = await allImages();
+      this.images = await allImages.bind(this)();
     },
     changeView: function(image) {
       this.currentView = "single";
