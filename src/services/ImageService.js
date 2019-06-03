@@ -8,8 +8,7 @@ export const allImages = async function() {
     return images;
   } catch (error) {
     console.error(error);
-    const config = { text: error.toString(), title: "Error loading Images" };
-    this.$dialog.error(config);
+    this.$dialog.message.error(error.toString(), { position: "top" });
   }
   return [];
 };

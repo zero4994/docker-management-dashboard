@@ -38,7 +38,8 @@
               </v-tab-item>
             </v-tabs>
 
-            <v-btn color="yellow accent-4" @click="startContainer">START CONTAINER
+            <v-btn color="yellow accent-4" @click="startContainer">
+              START CONTAINER
               <v-icon>play_arrow</v-icon>
             </v-btn>
           </v-card>
@@ -57,8 +58,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import ImageAdditionalInfo from "./ImageAdditionalInfo.vue";
+import { createContainer } from "../../services/ContainerService";
 
 export default {
   props: ["image"],
@@ -100,17 +101,7 @@ export default {
           this.selectedVersion
         }`;
 
-        console.log("starting container");
-        const { data } = await axios({
-          method: "post",
-          url: "/api/containers/create",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          data: JSON.stringify(containerOptions)
-        });
-        console.log("====>", data);
-        alert(data);
+        createContainer.bind(this)(containerOptions);
       } catch (error) {
         console.error(error);
       }
