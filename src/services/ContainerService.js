@@ -9,13 +9,24 @@ export const allContainers = async function() {
     return containers;
   } catch (error) {
     console.error(error);
-    const config = {
-      text: error.toString(),
-      title: "Error loading Containers"
-    };
-    this.$dialog.error(config);
+    this.$dialog.message.error(error.toString(), { position: "top" });
   }
   return [];
+};
+
+export const createContainer = async function(options) {
+  try {
+    console.log(`Creating container`);
+    const container = await docker.createContainer(options);
+    const process = await container.start();
+    this.$dialog.message.success(`Container created with id: ${process.id}`, {
+      position: "top"
+    });
+    return process.id;
+  } catch (error) {
+    console.error(error);
+    this.$dialog.message.error(error.toString(), { position: "top" });
+  }
 };
 
 export const containerById = id => {
