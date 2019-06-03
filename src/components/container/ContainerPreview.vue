@@ -88,7 +88,6 @@
 import {
   stopContainer,
   deleteContainer,
-  pauseContainer,
   unpauseContainer
 } from "../../services/ContainerService.js";
 
@@ -99,13 +98,10 @@ export default {
   }),
   methods: {
     onStopContainer: async function() {
-      try {
-        const { data } = await stopContainer(this.container.Id);
-        alert(data);
-        this.$emit("fetchAllContainers");
-      } catch (error) {
-        console.error(error);
-      }
+      this.isDisabled = true;
+      stopContainer.bind(this)(this.container.Id);
+      this.isDisabled = false;
+      this.$emit("fetchAllContainers");
     },
     onRemoveContainer: async function() {
       const forceRemove = await this.$dialog.confirm({
@@ -117,18 +113,12 @@ export default {
         }
       });
 
-      this.isDisabled = true;
-      deleteContainer.bind(this)(this.container.Id, forceRemove);
-      this.$emit("fetchAllContainers");
-    },
-    onPauseContainer: async function() {
-      try {
-        const { data } = await pauseContainer(this.container.Id);
-        alert(data);
-        this.$emit("fetchAllContainers");
-      } catch (error) {
-        console.error(error);
+      if (typeof forceRemove === "undefined") {
+        return;
       }
+      this.isDisabled = true;
+      deleteContainer.bind(this)(this.container.Id + "dd", forceRemove);
+      this.$emit("fetchAllContainers");
     },
     onUnpauseContainer: async function() {
       try {
