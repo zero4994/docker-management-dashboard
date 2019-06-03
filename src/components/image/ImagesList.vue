@@ -47,7 +47,12 @@ export default {
   }),
   methods: {
     fetchAllImages: async function() {
-      this.images = await allImages.bind(this)();
+      try {
+        this.images = await allImages.bind(this)();
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error(error.toString(), { position: "top" });
+      }
     },
     changeView: function(image) {
       this.currentView = "single";
