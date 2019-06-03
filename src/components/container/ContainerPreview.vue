@@ -44,7 +44,12 @@
       <v-container>
         <v-layout>
           <v-flex>
-            <v-btn color="red darken-3" dark @click="onStopContainer">
+            <v-btn
+              color="red darken-3"
+              :dark="!isDisabled"
+              @click="onStopContainer"
+              :disabled="isDisabled"
+            >
               <v-icon>stop</v-icon>
             </v-btn>
           </v-flex>
@@ -54,12 +59,22 @@
             </v-btn>
           </v-flex>-->
           <v-flex>
-            <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">
+            <v-btn
+              color="light-green lighten-1"
+              :dark="!isDisabled"
+              @click="onUnpauseContainer"
+              :disabled="isDisabled"
+            >
               <v-icon>play_arrow</v-icon>
             </v-btn>
           </v-flex>
           <v-flex>
-            <v-btn color="grey darken-4" dark @click="onRemoveContainer">
+            <v-btn
+              color="grey darken-4"
+              :dark="!isDisabled"
+              @click="onRemoveContainer"
+              :disabled="isDisabled"
+            >
               <i class="fas fa-trash-alt"></i>
             </v-btn>
           </v-flex>
@@ -79,6 +94,9 @@ import {
 
 export default {
   props: ["container"],
+  data: () => ({
+    isDisabled: false
+  }),
   methods: {
     onStopContainer: async function() {
       try {
@@ -90,14 +108,18 @@ export default {
       }
     },
     onRemoveContainer: async function() {
-      try {
-        const { data } = await deleteContainer(this.container.Id);
+      const forceRemove = await this.$dialog.confirm({
+        text: "Do you want to force remove the container?",
+        title: "Remove Container",
+        actions: {
+          false: "No",
+          true: "Yes"
+        }
+      });
 
-        alert(data);
-        this.$emit("fetchAllContainers");
-      } catch (error) {
-        console.error(error);
-      }
+      this.isDisabled = true;
+      deleteContainer.bind(this)(this.container.Id, forceRemove);
+      this.$emit("fetchAllContainers");
     },
     onPauseContainer: async function() {
       try {
