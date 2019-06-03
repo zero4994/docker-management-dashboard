@@ -1,13 +1,21 @@
 import axios from "axios";
+import { docker } from "./config";
 
-export const allContainers = () => {
-  return axios({
-    method: "get",
-    url: "api/containers",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const allContainers = async function() {
+  try {
+    console.log("Querying all containers...");
+    const containers = await docker.listContainers({ all: true });
+    console.debug("Containers: ", containers);
+    return containers;
+  } catch (error) {
+    console.error(error);
+    const config = {
+      text: error.toString(),
+      title: "Error loading Containers"
+    };
+    this.$dialog.error(config);
+  }
+  return [];
 };
 
 export const containerById = id => {

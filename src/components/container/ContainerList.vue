@@ -54,17 +54,13 @@ export default {
     containers: [],
     currentView: "all",
     interval: {},
-    selectedId: ""
+    selectedId: "",
+    socket: {} //temporal variable
   }),
-  props: ["socket"],
+  //props: ["socket"],
   methods: {
     fetchAllContainers: async function() {
-      try {
-        const { data } = await allContainers();
-        this.containers = data;
-      } catch (error) {
-        console.error(error);
-      }
+      this.containers = await allContainers.bind(this)();
     },
     changeView: function(id, view) {
       console.log("this is the id", id, view);
