@@ -40,21 +40,12 @@ export const containerById = id => {
 };
 
 export const stopContainer = async function(id) {
-  try {
-    console.log(`Stopping container with id: ${id}...`);
-    const container = await docker.getContainer(id);
-    const response = await container.stop();
+  console.log(`Stopping container with id: ${id}...`);
+  const container = await docker.getContainer(id);
+  const response = await container.stop();
 
-    if (typeof respose !== "undefined") {
-      throw new Error(response);
-    }
-
-    this.$dialog.message.success("Container successfully stopped", {
-      position: "top"
-    });
-  } catch (error) {
-    console.error(error);
-    this.$dialog.message.error(error.toString(), { position: "top" });
+  if (typeof respose !== "undefined") {
+    throw new Error(response);
   }
 };
 

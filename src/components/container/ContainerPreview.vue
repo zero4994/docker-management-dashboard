@@ -98,10 +98,19 @@ export default {
   }),
   methods: {
     onStopContainer: async function() {
-      this.isDisabled = true;
-      stopContainer.bind(this)(this.container.Id);
+      try {
+        this.isDisabled = true;
+        await stopContainer.bind(this)(this.container.Id);
+        this.$emit("fetchAllContainers");
+
+        this.$dialog.message.success("Container successfully stopped", {
+          position: "top"
+        });
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error(error.toString(), { position: "top" });
+      }
       this.isDisabled = false;
-      this.$emit("fetchAllContainers");
     },
     onRemoveContainer: async function() {
       try {
