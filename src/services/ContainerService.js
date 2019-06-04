@@ -15,18 +15,11 @@ export const allContainers = async function() {
 };
 
 export const createContainer = async function(options) {
-  try {
-    console.log(`Creating container`);
-    const container = await docker.createContainer(options);
-    const process = await container.start();
-    this.$dialog.message.success(`Container created with id: ${process.id}`, {
-      position: "top"
-    });
-    return process.id;
-  } catch (error) {
-    console.error(error);
-    this.$dialog.message.error(error.toString(), { position: "top" });
-  }
+  console.log(`Creating container`);
+  const container = await docker.createContainer(options);
+  const process = await container.start();
+
+  return process.id;
 };
 
 export const containerById = id => {
