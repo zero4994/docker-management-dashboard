@@ -101,10 +101,19 @@ export default {
           this.selectedVersion
         }`;
 
-        createContainer.bind(this)(containerOptions);
+        const containerID = await createContainer.bind(this)(containerOptions);
+
+        this.$dialog.message.success(
+          `Container created with id: ${containerID}`,
+          {
+            position: "top-left"
+          }
+        );
       } catch (error) {
         console.error(error);
-        this.$dialog.message.error(error.toString(), { position: "top" });
+        this.$dialog.message.error("Error starting the container", {
+          position: "top-left"
+        });
       }
     },
     changeSelectedVersion(selected) {

@@ -104,11 +104,13 @@ export default {
         this.$emit("fetchAllContainers");
 
         this.$dialog.message.success("Container successfully stopped", {
-          position: "top"
+          position: "top-left"
         });
       } catch (error) {
         console.error(error);
-        this.$dialog.message.error(error.toString(), { position: "top" });
+        this.$dialog.message.error("Error stopping container", {
+          position: "top-left"
+        });
       }
       this.isDisabled = false;
     },
@@ -129,11 +131,15 @@ export default {
         this.isDisabled = true;
         await deleteContainer.bind(this)(this.container.Id, forceRemove);
         this.$emit("fetchAllContainers");
-        this.$dialog.message.success("Container removed", { position: "top" });
+        this.$dialog.message.success("Container removed", {
+          position: "top-left"
+        });
       } catch (error) {
         console.error(error);
         this.isDisabled = false;
-        this.$dialog.message.error(error.toString(), { position: "top" });
+        this.$dialog.message.error("Error removing the container", {
+          position: "top-left"
+        });
       }
     },
     onUnpauseContainer: async function() {
