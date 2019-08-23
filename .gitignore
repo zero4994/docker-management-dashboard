@@ -63,3 +63,4 @@ typings/
 /server/deprecated
 #Electron-builder output
 /dist_electron
+.idea/*
