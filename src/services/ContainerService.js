@@ -22,14 +22,10 @@ export const createContainer = async function(options) {
   return process.id;
 };
 
-export const containerById = id => {
-  return axios({
-    method: "get",
-    url: `api/containers/${id}`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const containerById = async function(id) {
+  console.log(`fetching container: ${id}`);
+  const containers = await docker.listContainers({ all: true });
+  return containers.filter(element => element.Id === id);
 };
 
 export const stopContainer = async function(id) {
@@ -72,14 +68,10 @@ export const unpauseContainer = id => {
   });
 };
 
-export const inspectContainer = id => {
-  return axios({
-    method: "get",
-    url: `/api/containers/${id}/inspect`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const inspectContainer = async function(id) {
+  console.log(`Inspecting container with id: ${id}`);
+  const container = await docker.getContainer(id);
+  return await container.inspect();
 };
 
 export const getContainerLogs = (id, lastUpdateTime) => {
