@@ -1,20 +1,10 @@
 <template>
   <!-- <v-card>
     <v-card-actions>
-      <span class="headline">Logs</span>
+      <! -- <span class="headline">Logs</span> - ->
     </v-card-actions>
     <v-card-actions>
-      <v-textarea
-        solo
-        readonly
-        name="input-7-1"
-        v-model="logs"
-        class="fixed-heigth"
-        rows="32"
-        no-resize
-        dark
-        id="textLogs"
-      ></v-textarea>
+      
     </v-card-actions>
   </v-card>-->
   <vue-command
@@ -33,7 +23,7 @@ import "vue-command/dist/vue-command.css";
 import { getContainerLogs } from "../../services/ContainerService.js";
 import { setInterval } from "timers";
 export default {
-  props: ["id", "socket"],
+  props: ["id"],
   components: {
     "vue-command": VueCommand
   },
@@ -86,8 +76,8 @@ export default {
   .term-std {
     // min-width: 50px;
     // max-width: 50px;
-    min-height: 300px;
-    max-height: 600px;
+    height: 45.5rem;
+    // max-height: 600px;
     overflow-y: scroll;
   }
 }

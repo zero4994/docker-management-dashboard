@@ -25,11 +25,7 @@
       </v-container>
     </div>
     <div v-else>
-      <docker-container
-        v-bind:containerId="this.selectedId"
-        v-bind:socket="this.socket"
-        v-on:changeView="changeView"
-      />
+      <docker-container v-bind:containerId="this.selectedId" v-on:changeView="changeView" />
     </div>
   </div>
 </template>
@@ -54,10 +50,8 @@ export default {
     containers: [],
     currentView: "all",
     interval: {},
-    selectedId: "",
-    socket: {} //temporal variable
+    selectedId: ""
   }),
-  //props: ["socket"],
   methods: {
     fetchAllContainers: async function() {
       this.containers = await allContainers.bind(this)();
