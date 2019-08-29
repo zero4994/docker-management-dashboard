@@ -23,7 +23,7 @@ export const createContainer = async function(options) {
 };
 
 export const containerById = async function(id) {
-  console.log(`fetching container: ${id}`);
+  console.debug(`fetching container: ${id}`);
   const containers = await docker.listContainers({ all: true });
   return containers.filter(element => element.Id === id);
 };
@@ -74,15 +74,25 @@ export const inspectContainer = async function(id) {
   return await container.inspect();
 };
 
-export const getContainerLogs = (id, lastUpdateTime) => {
-  return axios({
-    method: "get",
-    url: `/api/containers/${id}/logs`,
-    headers: {
-      "Content-Type": "application/json"
-    },
-    params: {
-      lastUpdateTime
-    }
+export const getContainerLogs = async function(id, lastUpdateTime, logs) {
+  console.log(`Fetching logs for container with id: ${id}`);
+  const container = docker.getContainer(id);
+
+  let stream = require("stream");
+  let logStream = new stream.PassThrough();
+  logStream.on("data", function(chunk) {
+    logs.push(chunk.toString("utf8"));
   });
+
+  let currentStream = await container.logs({
+    follow: true,
+    stdout: true,
+    stderr: true
+  });
+
+  container.modem.demuxStream(currentStream, logStream, logStream);
+
+  // stream.on("end", function() {
+  //   logStream.end("en");
+  // });
 };

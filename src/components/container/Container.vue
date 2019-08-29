@@ -4,11 +4,11 @@
     <v-container fluid grid-list-md id="workspace">
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
-          <!-- <logs
+          <logs
             v-if="currentView === 'logs'"
             v-bind:id="this.containerId"
             v-bind:socket="this.socket"
-          />-->
+          />
           <inspect v-if="currentView === 'inspect'" v-bind:id="container.Id" />
         </v-flex>
         <v-flex v-bind="{ [`md3`]: true }">
@@ -31,6 +31,7 @@ import QuickActions from "./QuickActions.vue";
 import Stats from "./Stats.vue";
 import Logs from "./Logs.vue";
 import Inspect from "./Inspect.vue";
+
 import { containerById } from "../../services/ContainerService.js";
 
 export default {
@@ -76,3 +77,4 @@ export default {
   margin-left: 7rem;
 }
 </style>
+
