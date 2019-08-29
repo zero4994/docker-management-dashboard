@@ -15,5 +15,6 @@ install:
     fi
 
 script:
+  - "yarn install"
   - "yarn electron:build"
   - "cd dist_electron && ls -la"
