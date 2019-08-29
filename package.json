@@ -7,7 +7,8 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "serve": "yarn electron:serve"
   },
   "main": "background.js",
   "dependencies": {
@@ -19,6 +20,7 @@
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "vue": "^2.5.16",
+    "vue-command": "^6.2.3",
     "vuetify": "^1.5.1",
     "vuetify-dialog": "^0.3.6"
   },
