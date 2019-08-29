@@ -5,7 +5,8 @@
         <v-layout row wrap>
           <h1>Images</h1>
           <v-spacer></v-spacer>
-          <v-btn color="cyan" dark @click="fetchAllImages">Refresh
+          <v-btn color="cyan" dark @click="fetchAllImages">
+            Refresh
             <v-icon>refresh</v-icon>
           </v-btn>
         </v-layout>
@@ -13,7 +14,7 @@
 
       <v-container fluid grid-list-md>
         <v-layout row wrap>
-          <v-flex v-for="image in this.images" :key="image.Id" v-bind="{ [`md4`]: true }">
+          <v-flex v-for="image in this.images" :key="image.Id" v-bind="{ [`md4`]: true }" sm4>
             <docker-image v-bind:image="image" v-on:changeView="changeView"/>
           </v-flex>
         </v-layout>
@@ -47,11 +48,10 @@ export default {
   methods: {
     fetchAllImages: async function() {
       try {
-        const { data } = await allImages();
-        console.log(data);
-        this.images = data;
+        this.images = await allImages.bind(this)();
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error(error.toString(), { position: "top" });
       }
     },
     changeView: function(image) {

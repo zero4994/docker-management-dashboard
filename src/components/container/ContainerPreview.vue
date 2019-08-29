@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-card-actions>
-        <span class="headline">{{ container.Image }}</span>
+        <span class="title">{{ container.Image }}</span>
         <v-spacer></v-spacer>
         <v-btn color="indigo" dark @click="$emit('changeView', container.Id, 'single')">
           <v-icon>open_in_new</v-icon>
@@ -41,21 +41,45 @@
         </v-list-tile>
       </v-list>
 
-      <v-card-actions class="justify-center">
-        <v-btn color="red darken-3" dark @click="onStopContainer">STOP
-          <v-icon>stop</v-icon>
-        </v-btn>
-        <v-btn color="yellow darken-1" dark @click="onPauseContainer">PAUSE
-          <v-icon>pause</v-icon>
-        </v-btn>
-        <v-btn color="light-green lighten-1" dark @click="onUnpauseContainer">UNPAUSE
-          <v-icon>play_arrow</v-icon>
-        </v-btn>
-        <v-btn color="grey darken-4" dark @click="onRemoveContainer">
-          REMOVE
-          <i class="fas fa-trash-alt"></i>
-        </v-btn>
-      </v-card-actions>
+      <v-container>
+        <v-layout>
+          <v-flex>
+            <v-btn
+              color="red darken-3"
+              :dark="!isDisabled"
+              @click="onStopContainer"
+              :disabled="isDisabled"
+            >
+              <v-icon>stop</v-icon>
+            </v-btn>
+          </v-flex>
+          <!-- <v-flex>
+            <v-btn color="yellow darken-1" dark @click="onPauseContainer">
+              <v-icon>pause</v-icon>
+            </v-btn>
+          </v-flex>-->
+          <v-flex>
+            <v-btn
+              color="light-green lighten-1"
+              :dark="!isDisabled"
+              @click="onUnpauseContainer"
+              :disabled="isDisabled"
+            >
+              <v-icon>play_arrow</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex>
+            <v-btn
+              color="grey darken-4"
+              :dark="!isDisabled"
+              @click="onRemoveContainer"
+              :disabled="isDisabled"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
   </div>
 </template>
@@ -64,39 +88,58 @@
 import {
   stopContainer,
   deleteContainer,
-  pauseContainer,
   unpauseContainer
 } from "../../services/ContainerService.js";
 
 export default {
   props: ["container"],
+  data: () => ({
+    isDisabled: false
+  }),
   methods: {
     onStopContainer: async function() {
       try {
-        const { data } = await stopContainer(this.container.Id);
-        alert(data);
+        this.isDisabled = true;
+        await stopContainer.bind(this)(this.container.Id);
         this.$emit("fetchAllContainers");
+
+        this.$dialog.message.success("Container successfully stopped", {
+          position: "top-left"
+        });
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error("Error stopping container", {
+          position: "top-left"
+        });
       }
+      this.isDisabled = false;
     },
     onRemoveContainer: async function() {
       try {
-        const { data } = await deleteContainer(this.container.Id);
+        const forceRemove = await this.$dialog.confirm({
+          text: "Do you want to force remove the container?",
+          title: "Remove Container",
+          actions: {
+            false: "No",
+            true: "Yes"
+          }
+        });
 
-        alert(data);
+        if (typeof forceRemove === "undefined") {
+          return;
+        }
+        this.isDisabled = true;
+        await deleteContainer.bind(this)(this.container.Id, forceRemove);
         this.$emit("fetchAllContainers");
+        this.$dialog.message.success("Container removed", {
+          position: "top-left"
+        });
       } catch (error) {
         console.error(error);
-      }
-    },
-    onPauseContainer: async function() {
-      try {
-        const { data } = await pauseContainer(this.container.Id);
-        alert(data);
-        this.$emit("fetchAllContainers");
-      } catch (error) {
-        console.error(error);
+        this.isDisabled = false;
+        this.$dialog.message.error("Error removing the container", {
+          position: "top-left"
+        });
       }
     },
     onUnpauseContainer: async function() {

@@ -1,9 +1,9 @@
 <template>
   <v-app id="app">
-    <navbar v-on:changeView="changeView"/>
+    <navbar v-on:changeView="changeView" />
     <v-content>
-      <images-list v-if="this.currentView === 'Images'"/>
-      <containers-list v-else v-bind:socket="socket"/>
+      <images-list v-if="this.currentView === 'Images'" />
+      <containers-list v-else />
     </v-content>
   </v-app>
 </template>
@@ -12,7 +12,6 @@
 import Navbar from "./components/Navbar.vue";
 import ImagesList from "./components/image/ImagesList.vue";
 import ContainerList from "./components/container/ContainerList.vue";
-const io = require("socket.io-client");
 
 export default {
   name: "App",
@@ -22,16 +21,12 @@ export default {
     "containers-list": ContainerList
   },
   data: () => ({
-    currentView: "Images",
-    socket: {}
+    currentView: "Images"
   }),
   methods: {
     changeView: function(value) {
       this.currentView = value;
     }
-  },
-  mounted() {
-    this.socket = io.connect("localhost:3000");
   }
 };
 </script>
