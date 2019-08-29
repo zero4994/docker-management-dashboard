@@ -8,11 +8,18 @@ cache:
   yarn: true
   directories:
     - node_modules
-install:
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew install yarn;
-    fi
+# install:
+#   - |
+#     if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+#       brew install yarn;
+#     fi
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file: docker-dashboard-*-mac.zip
+  skip_cleanup: true
+  on:
+    tags: true
 
 script:
   - "yarn install"
