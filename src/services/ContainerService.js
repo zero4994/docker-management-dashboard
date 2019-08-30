@@ -74,14 +74,14 @@ export const inspectContainer = async function(id) {
   return await container.inspect();
 };
 
-export const getContainerLogs = async function(id, lastUpdateTime, logs) {
+export const getContainerLogs = async function(id, setLogs) {
   console.log(`Fetching logs for container with id: ${id}`);
   const container = docker.getContainer(id);
 
   let stream = require("stream");
   let logStream = new stream.PassThrough();
   logStream.on("data", function(chunk) {
-    logs.push(chunk.toString("utf8"));
+    setLogs(chunk.toString("utf8"));
   });
 
   let currentStream = await container.logs({
