@@ -6,6 +6,7 @@
     :intro="intro"
     :title="title"
     :show-intro="true"
+    :hide-prompt="this.configuration['hide-prompt']"
   />
 </template>
 
@@ -53,8 +54,9 @@ export default {
 
   .term-std {
     // min-width: 50px;
-    // max-width: 50px;
-    height: 45.5rem;
+    max-width: 65rem;
+    // width: auto;
+    height: 43.5rem;
     // max-height: 600px;
     overflow-y: scroll;
   }

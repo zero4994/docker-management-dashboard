@@ -1,5 +1,8 @@
 <template>
-  <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+  <div>
+    <span class="headline">Container Logs</span>
+    <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+  </div>
 </template>
 
 <script>
@@ -16,11 +19,14 @@ export default {
   }),
   created() {
     this.configuration = {
-      intro: "docker container logs"
+      intro: "docker container logs",
+      "hide-prompt": true
     };
   },
   mounted() {
     this.getLogs(this.id);
+    // const data = JSON.stringify({ a: 1, b: 2, c: 3, d: [4, 5, 6] }, null, 3);
+    this.$refs.terminal.setHistory(`<pre>${data}</pre>`);
   },
   methods: {
     getLogs: async function(id) {
