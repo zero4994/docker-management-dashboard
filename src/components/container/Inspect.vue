@@ -1,21 +1,26 @@
 <template>
-  <v-card>
-    <v-card-actions>
-      <span class="headline">Inspect</span>
-    </v-card-actions>
-    <v-card-actions>
-      <v-textarea solo readonly v-model="container" class="fixed-heigth" rows="32" no-resize></v-textarea>
-    </v-card-actions>
-  </v-card>
+  <div>
+    <span class="headline mb-4">Inspect Container</span>
+    <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+  </div>
 </template>
 
 <script>
+import Terminal from "../Terminal";
 import { inspectContainer } from "../../services/ContainerService.js";
 export default {
   props: ["id"],
+  components: {
+    terminal: Terminal
+  },
   data: () => ({
     container: ""
   }),
+  created() {
+    this.configuration = {
+      intro: "docker container inspect"
+    };
+  },
   mounted() {
     this.inspectContainer(this.id);
   },
@@ -23,7 +28,9 @@ export default {
     inspectContainer: async function(id) {
       try {
         const data = await inspectContainer(id);
-        this.container = JSON.stringify(data, null, 3);
+        this.$refs.terminal.setHistory(
+          `<pre>${JSON.stringify(data, null, 3)}</pre>`
+        );
       } catch (error) {
         console.error(error);
       }
