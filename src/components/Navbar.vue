@@ -40,12 +40,12 @@ export default {
         title: "Containers",
         icon: `<i class="fas fa-box fa-2x"></i>`,
         view: "Containers"
+      },
+      {
+        title: "Volumes",
+        icon: `<i class="far fa-hdd fa-2x"></i>`,
+        view: "Volumes"
       }
-      // {
-      //   title: "Volumes",
-      //   icon: `<i class="far fa-hdd fa-2x"></i>`,
-      //   view: ""
-      // }
     ]
   }),
   methods: {
