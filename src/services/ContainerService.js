@@ -1,4 +1,3 @@
-import axios from "axios";
 import { docker } from "./config";
 
 export const allContainers = async function() {

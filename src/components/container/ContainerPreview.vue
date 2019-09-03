@@ -144,11 +144,16 @@ export default {
     },
     onUnpauseContainer: async function() {
       try {
-        const { data } = await unpauseContainer(this.container.Id);
-        alert(data);
+        await unpauseContainer(this.id);
+        this.$dialog.message.success("Container successfully unpaused", {
+          position: "top-left"
+        });
         this.$emit("fetchAllContainers");
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error("Error unpausing container", {
+          position: "top-left"
+        });
       }
     }
   }
