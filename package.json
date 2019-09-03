@@ -1,6 +1,6 @@
 {
   "name": "docker-dashboard",
-  "version": "1.4.16",
+  "version": "1.4.17",
   "author": "zero4994 <cavc94@gmail.com>",
   "scripts": {
     "lint": "vue-cli-service lint",

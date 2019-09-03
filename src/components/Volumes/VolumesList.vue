@@ -20,7 +20,7 @@
           <td>{{ props.item.Driver }}</td>
           <td>{{ props.item.Scope }}</td>
           <td>{{ props.item.Mountpoint }}</td>
-          <v-btn icon>
+          <v-btn icon @click="deleteVolume(props.item.Name)">
             <v-icon>delete</v-icon>
           </v-btn>
         </template>
@@ -30,7 +30,11 @@
 </template>
 
 <script>
-import { allVolumes, createVolume } from "../../services/VolumeService";
+import {
+  allVolumes,
+  createVolume,
+  removeVolume
+} from "../../services/VolumeService";
 import moment from "moment";
 
 export default {
@@ -107,6 +111,33 @@ export default {
       } catch (error) {
         console.error(error);
         this.$dialog.message.error("Error creating the volume", {
+          position: "top-left"
+        });
+      }
+    },
+    deleteVolume: async function(name) {
+      try {
+        const confirmation = await this.$dialog.confirm({
+          text: `Are you sure you want to remove the volume ${name}?`,
+          title: "Remove Volume",
+          actions: {
+            false: "No",
+            true: "yes"
+          }
+        });
+
+        if (typeof confirmation === "undefined" || !confirmation) {
+          return;
+        }
+
+        await removeVolume(name);
+        this.$dialog.message.success("Successfully removed volume", {
+          position: "top-left"
+        });
+        this.fetchAllVolumes();
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error removing volume", {
           position: "top-left"
         });
       }
