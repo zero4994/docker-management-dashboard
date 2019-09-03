@@ -48,24 +48,16 @@ export const deleteContainer = async function(id, force = true) {
   }
 };
 
-export const pauseContainer = id => {
-  return axios({
-    method: "post",
-    url: `/api/containers/${id}/pause`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const pauseContainer = async function(id) {
+  console.log(`Pausing container with id: ${id}...`);
+  const container = docker.getContainer(id);
+  await container.pause();
 };
 
-export const unpauseContainer = id => {
-  return axios({
-    method: "post",
-    url: `/api/containers/${id}/unpause`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+export const unpauseContainer = async function(id) {
+  console.log(`Unpausing container with id: ${id}`);
+  const container = docker.getContainer(id);
+  await container.unpause();
 };
 
 export const inspectContainer = async function(id) {

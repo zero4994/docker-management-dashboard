@@ -6,7 +6,8 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="red darken-3" dark block @click="onStopContainer">STOP
+        <v-btn color="red darken-3" dark block @click="onStopContainer">
+          STOP
           <v-icon>stop</v-icon>
         </v-btn>
       </v-flex>
@@ -16,7 +17,8 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="yellow darken-1" dark block @click="onPauseContainer">PAUSE
+        <v-btn color="yellow darken-1" dark block @click="onPauseContainer">
+          PAUSE
           <v-icon>pause</v-icon>
         </v-btn>
       </v-flex>
@@ -26,7 +28,8 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="light-green lighten-1" dark block @click="onUnpauseContainer">UNPAUSE
+        <v-btn color="light-green lighten-1" dark block @click="onUnpauseContainer">
+          UNPAUSE
           <v-icon>play_arrow</v-icon>
         </v-btn>
       </v-flex>
@@ -59,40 +62,71 @@ export default {
   methods: {
     onStopContainer: async function() {
       try {
-        const { data } = await stopContainer(this.id);
-        alert(data);
+        await stopContainer.bind(this)(this.id);
+        this.$dialog.message.success("Container successfully stopped", {
+          position: "top-left"
+        });
         this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error("Error stopping container", {
+          position: "top-left"
+        });
       }
     },
     onRemoveContainer: async function() {
       try {
-        const { data } = await deleteContainer(this.id);
+        const forceRemove = await this.$dialog.confirm({
+          text: "Do you want to force remove the container?",
+          title: "Remove Container",
+          actions: {
+            false: "No",
+            true: "yes"
+          }
+        });
 
-        alert(data);
-        //this.$emit("fetchContainer", this.id);
+        if (typeof forceRemove === "undefined") {
+          return;
+        }
+
+        await deleteContainer.bind(this)(this.id, forceRemove);
+        this.$dialog.message.success("Container removed", {
+          position: "top-left"
+        });
         this.$emit("changeView", "allContainers");
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error("Error removing the container", {
+          position: "top-left"
+        });
       }
     },
     onPauseContainer: async function() {
       try {
-        const { data } = await pauseContainer(this.id);
-        alert(data);
+        await pauseContainer(this.id);
+        this.$dialog.message.success("Container successfully paused", {
+          position: "top-left"
+        });
         this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error("Error pausing container", {
+          position: "top-left"
+        });
       }
     },
     onUnpauseContainer: async function() {
       try {
-        const { data } = await unpauseContainer(this.id);
-        alert(data);
+        await unpauseContainer(this.id);
+        this.$dialog.message.success("Container successfully unpaused", {
+          position: "top-left"
+        });
         this.$emit("fetchContainer", this.id);
       } catch (error) {
         console.error(error);
+        this.$dialog.message.error("Error unpausing container", {
+          position: "top-left"
+        });
       }
     }
   }
