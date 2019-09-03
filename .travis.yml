@@ -16,7 +16,7 @@ cache:
 deploy:
   provider: releases
   api_key: $GH_TOKEN
-  file: docker-dashboard-*-mac.zip
+  file: releases/*
   skip_cleanup: true
   on:
     tags: true
@@ -25,3 +25,6 @@ script:
   - "yarn install"
   - "yarn electron:build"
   - "cd dist_electron && ls -la"
+  - "mkdir releases && cd ./releases && mkdir MacOS"
+  - "cp ../docker-dashboard-*-mac.zip ../docker-dashboard-*.dmg ../docker-dashboard-*.dmg.blockmap ../latest-mac.yml ./MacOS"
+  - "zip -r MacOS.zip ./MacOS/ && rm -R ./MacOS && cd ../ && ls -la"
