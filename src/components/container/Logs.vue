@@ -25,8 +25,6 @@ export default {
   },
   mounted() {
     this.getLogs(this.id);
-    // const data = JSON.stringify({ a: 1, b: 2, c: 3, d: [4, 5, 6] }, null, 3);
-    this.$refs.terminal.setHistory(`<pre>${data}</pre>`);
   },
   methods: {
     getLogs: async function(id) {
