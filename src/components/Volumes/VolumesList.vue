@@ -4,6 +4,10 @@
       <v-layout row wrap>
         <h1>Volumes</h1>
         <v-spacer></v-spacer>
+        <v-btn color="green lighten-2" dark @click="createVolume">
+          Create Volume
+          <v-icon>add_circle</v-icon>
+        </v-btn>
         <v-btn color="cyan" dark @click="fetchAllVolumes">
           Refresh
           <v-icon>refresh</v-icon>
@@ -26,7 +30,7 @@
 </template>
 
 <script>
-import { allVolumes } from "../../services/VolumeService";
+import { allVolumes, createVolume } from "../../services/VolumeService";
 import moment from "moment";
 
 export default {
@@ -79,6 +83,33 @@ export default {
     },
     formatDate: function(date) {
       return moment(date).format("LLL");
+    },
+    createVolume: async function() {
+      try {
+        const volumeName = await this.$dialog.prompt({
+          title: "Create Volume",
+          text: "Please input a name for the volume"
+        });
+        console.log(volumeName);
+
+        if (
+          typeof volumeName === "undefined" ||
+          typeof volumeName === "boolean"
+        ) {
+          return;
+        }
+
+        await createVolume(volumeName);
+        this.$dialog.message.success("Volume created", {
+          position: "top-left"
+        });
+        this.fetchAllVolumes();
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error creating the volume", {
+          position: "top-left"
+        });
+      }
     }
   },
   mounted() {
