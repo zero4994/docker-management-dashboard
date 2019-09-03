@@ -6,14 +6,19 @@
         <v-spacer></v-spacer>
         <v-btn color="green lighten-2" dark @click="createVolume">
           Create Volume
-          <v-icon>add_circle</v-icon>
+          <v-icon class="icon-padding-left">add_circle</v-icon>
         </v-btn>
         <v-btn color="cyan" dark @click="fetchAllVolumes">
           Refresh
-          <v-icon>refresh</v-icon>
+          <v-icon class="icon-padding-left">refresh</v-icon>
         </v-btn>
       </v-layout>
-      <v-data-table :headers="headers" :items="this.volumes" class="elevation-1 mt-4">
+      <v-data-table
+        :headers="headers"
+        :items="this.volumes"
+        class="elevation-1 mt-4 mb-4"
+        :rows-per-page-items="[10]"
+      >
         <template v-slot:items="props">
           <td>{{ props.item.Name }}</td>
           <td>{{ formatDate(props.item.CreatedAt) }}</td>
@@ -25,6 +30,12 @@
           </v-btn>
         </template>
       </v-data-table>
+      <v-footer color="#e9ebee" absolute height="60">
+        <v-btn color="red darken-4" dark @click="pruneVolumes" absolute right>
+          Prune Volumes
+          <i class="fas fa-trash-alt icon-padding-left"></i>
+        </v-btn>
+      </v-footer>
     </v-container>
   </div>
 </template>
@@ -33,7 +44,8 @@
 import {
   allVolumes,
   createVolume,
-  removeVolume
+  removeVolume,
+  pruneVolumes
 } from "../../services/VolumeService";
 import moment from "moment";
 
@@ -141,6 +153,37 @@ export default {
           position: "top-left"
         });
       }
+    },
+    pruneVolumes: async function() {
+      try {
+        const confirmation = await this.$dialog.confirm({
+          text:
+            "WARNING! This will remove all local volumes not used by at least one container. Are you sure you want to continue?",
+          title: "Prune Volumes",
+          actions: {
+            false: "No",
+            true: "Yes"
+          }
+        });
+
+        if (typeof confirmation === "undefined") {
+          return;
+        }
+
+        const result = await pruneVolumes();
+
+        this.$dialog.message.success(
+          `Volumes deleted: ${result.VolumesDeleted.length}, Space reclaimed: ${result.SpaceReclaimed}B`,
+          { position: "top-left" }
+        );
+
+        this.fetchAllVolumes();
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error pruning volumes", {
+          position: "top-left"
+        });
+      }
     }
   },
   mounted() {
@@ -149,5 +192,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+i.icon-padding-left {
+  padding-left: 1rem;
+}
 </style>

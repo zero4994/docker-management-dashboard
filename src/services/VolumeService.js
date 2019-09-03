@@ -15,3 +15,8 @@ export const removeVolume = async function(name) {
   const volume = await docker.getVolume(name);
   await volume.remove();
 };
+
+export const pruneVolumes = async function() {
+  console.log("Pruning volumes...");
+  return await docker.pruneVolumes();
+};
