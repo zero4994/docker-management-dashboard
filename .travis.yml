@@ -16,7 +16,7 @@ cache:
 deploy:
   provider: releases
   api_key: $GH_TOKEN
-  file: releases/*
+  file: ./releases/*
   skip_cleanup: true
   on:
     tags: true
