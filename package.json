@@ -1,6 +1,6 @@
 {
   "name": "docker-dashboard",
-  "version": "1.4.0",
+  "version": "1.4.20",
   "author": "zero4994 <cavc94@gmail.com>",
   "scripts": {
     "lint": "vue-cli-service lint",
@@ -12,7 +12,6 @@
   },
   "main": "background.js",
   "dependencies": {
-    "axios": "^0.18.0",
     "dockerode": "^2.5.8",
     "express": "^4.16.4",
     "moment": "^2.24.0",

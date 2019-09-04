@@ -3,7 +3,8 @@
     <navbar v-on:changeView="changeView" />
     <v-content>
       <images-list v-if="this.currentView === 'Images'" />
-      <containers-list v-else />
+      <containers-list v-else-if="this.currentView === 'Containers'" />
+      <volumes-list v-else-if="this.currentView === 'Volumes'" />
     </v-content>
   </v-app>
 </template>
@@ -12,13 +13,15 @@
 import Navbar from "./components/Navbar.vue";
 import ImagesList from "./components/image/ImagesList.vue";
 import ContainerList from "./components/container/ContainerList.vue";
+import VolumesList from "./components/Volumes/VolumesList.vue";
 
 export default {
   name: "App",
   components: {
     navbar: Navbar,
     "images-list": ImagesList,
-    "containers-list": ContainerList
+    "containers-list": ContainerList,
+    "volumes-list": VolumesList
   },
   data: () => ({
     currentView: "Images"

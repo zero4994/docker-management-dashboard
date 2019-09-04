@@ -1,5 +1,8 @@
 <template>
-  <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+  <div>
+    <span class="headline">Container Logs</span>
+    <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+  </div>
 </template>
 
 <script>
@@ -16,7 +19,8 @@ export default {
   }),
   created() {
     this.configuration = {
-      intro: "docker container logs"
+      intro: "docker container logs",
+      "hide-prompt": true
     };
   },
   mounted() {
