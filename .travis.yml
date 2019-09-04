@@ -13,6 +13,8 @@ cache:
 #     if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 #       brew install yarn;
 #     fi
+before_deploy:
+  - "pwd && ls -la"
 deploy:
   provider: releases
   api_key: $GH_TOKEN
