@@ -13,18 +13,32 @@
           <v-icon class="icon-padding-left">refresh</v-icon>
         </v-btn>
       </v-layout>
+      <v-layout>
+        <v-flex md8></v-flex>
+        <v-flex md4>
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
       <v-data-table
         :headers="headers"
         :items="this.volumes"
         class="elevation-1 mt-4 mb-4"
         :rows-per-page-items="[10]"
+        :search="search"
       >
         <template v-slot:items="props">
-          <td>{{ props.item.Name }}</td>
+          <td>{{ formatText(props.item.Name) }}</td>
           <td>{{ formatDate(props.item.CreatedAt) }}</td>
           <td>{{ props.item.Driver }}</td>
           <td>{{ props.item.Scope }}</td>
-          <td>{{ props.item.Mountpoint }}</td>
+          <td>{{ formatText(props.item.Mountpoint, 50) }}</td>
           <v-btn icon @click="deleteVolume(props.item.Name)">
             <v-icon>delete</v-icon>
           </v-btn>
@@ -83,7 +97,8 @@ export default {
         sortable: false,
         value: "Mountpoint"
       }
-    ]
+    ],
+    search: ""
   }),
   methods: {
     fetchAllVolumes: async function() {
@@ -99,6 +114,11 @@ export default {
     },
     formatDate: function(date) {
       return moment(date).format("LLL");
+    },
+    formatText: function(text, maxLength = 20) {
+      return text.length <= maxLength
+        ? text
+        : `${text.substr(0, maxLength)}...`;
     },
     createVolume: async function() {
       try {
