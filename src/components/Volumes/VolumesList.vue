@@ -13,11 +13,25 @@
           <v-icon class="icon-padding-left">refresh</v-icon>
         </v-btn>
       </v-layout>
+      <v-layout>
+        <v-flex md8></v-flex>
+        <v-flex md4>
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
       <v-data-table
         :headers="headers"
         :items="this.volumes"
         class="elevation-1 mt-4 mb-4"
         :rows-per-page-items="[10]"
+        :search="search"
       >
         <template v-slot:items="props">
           <td>{{ formatText(props.item.Name) }}</td>
@@ -83,7 +97,8 @@ export default {
         sortable: false,
         value: "Mountpoint"
       }
-    ]
+    ],
+    search: ""
   }),
   methods: {
     fetchAllVolumes: async function() {
