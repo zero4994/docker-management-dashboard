@@ -20,11 +20,11 @@
         :rows-per-page-items="[10]"
       >
         <template v-slot:items="props">
-          <td>{{ props.item.Name }}</td>
+          <td>{{ formatText(props.item.Name) }}</td>
           <td>{{ formatDate(props.item.CreatedAt) }}</td>
           <td>{{ props.item.Driver }}</td>
           <td>{{ props.item.Scope }}</td>
-          <td>{{ props.item.Mountpoint }}</td>
+          <td>{{ formatText(props.item.Mountpoint, 50) }}</td>
           <v-btn icon @click="deleteVolume(props.item.Name)">
             <v-icon>delete</v-icon>
           </v-btn>
@@ -99,6 +99,11 @@ export default {
     },
     formatDate: function(date) {
       return moment(date).format("LLL");
+    },
+    formatText: function(text, maxLength = 20) {
+      return text.length <= maxLength
+        ? text
+        : `${text.substr(0, maxLength)}...`;
     },
     createVolume: async function() {
       try {

@@ -2,7 +2,17 @@ import { docker } from "./config";
 
 export const allVolumes = async function() {
   console.log("Querying all volumes");
-  return await docker.listVolumes();
+  const volumes = await docker.listVolumes();
+  volumes.Volumes.sort((a, b) => {
+    if (a.Name.toLowerCase() < b.Name.toLowerCase()) {
+      return -1;
+    } else if (a.Name.toLowerCase() > b.Name.toLowerCase()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  return volumes;
 };
 
 export const createVolume = async function(name) {
