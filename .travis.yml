@@ -13,6 +13,10 @@ cache:
 #     if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 #       brew install yarn;
 #     fi
+branches:
+  only:
+    - master
+    - /\d+\.\d+(\.\d+)[a-z]*?(-\S*)?$/
 deploy:
   provider: releases
   api_key: $GH_TOKEN
