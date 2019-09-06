@@ -43,4 +43,8 @@ export default {
   /* background-color: #cfeef7; */
   background-color: #e9ebee;
 }
+
+i.icon-padding-left {
+  padding-left: 1rem;
+}
 </style>

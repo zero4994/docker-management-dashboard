@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <v-container fluid grid-list-md>
-      <v-layout row wrap>
-        
-      </v-layout>
-    </v-container>-->
-
     <v-container fluid grid-list-md>
       <h1 class="mb-2">{{ this.image.name }}</h1>
       <v-layout row wrap>

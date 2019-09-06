@@ -7,7 +7,7 @@
           <v-spacer></v-spacer>
           <v-btn color="cyan" dark @click="fetchAllImages">
             Refresh
-            <v-icon>refresh</v-icon>
+            <v-icon class="icon-padding-left">refresh</v-icon>
           </v-btn>
         </v-layout>
       </v-container>
