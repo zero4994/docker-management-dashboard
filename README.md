@@ -146,7 +146,7 @@ By selecting this option you will be asked for a name for that volume. Names mus
 ```
 
 <p align="center">
-    <img align="center" height="90%" width="90%" src="img/d-volume-name.png"> 
+    <img align="center" height="50%" width="50%" src="img/d-volume-name.png"> 
 </p>
 <br/>
 
@@ -155,7 +155,7 @@ By selecting this option you will be asked for a name for that volume. Names mus
 By selecting the icon at the end of every volume you can delete it from you local machine. You will be prompted for confirmation. Note: You can only remove volumes that are not currently being used by a container.
 
 <p align="center">
-    <img align="center" height="90%" width="90%" src="img/d-volume-delete.png"> 
+    <img align="center" height="50%" width="50%" src="img/d-volume-delete.png"> 
 </p>
 <br/>
 
@@ -164,7 +164,7 @@ By selecting the icon at the end of every volume you can delete it from you loca
 By selecting the prune volumes option you can delete all the volumes in your local machine. <strong> Important: </strong> This option will remove all local volumes not used by at least one container.
 
 <p align="center">
-    <img align="center" height="90%" width="90%" src="img/d-volume-prune.png"> 
+    <img align="center" height="50%" width="50%" src="img/d-volume-prune.png"> 
 </p>
 <br/>
 
