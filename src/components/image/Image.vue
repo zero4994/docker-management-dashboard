@@ -2,14 +2,10 @@
   <div>
     <v-card>
       <v-card-actions>
-        <span class="headline">{{ image.RepoTags[0].split(":")[0] }}</span>
+        <span class="headline">{{ image.name }}</span>
       </v-card-actions>
-      <v-btn
-        color="green lighten-2"
-        block
-        dark
-        v-on:click="$emit('changeView', image)"
-      >CREATE CONTAINER
+      <v-btn color="green lighten-2" block dark v-on:click="$emit('changeView', image)">
+        CREATE CONTAINER
         <v-icon>add_circle</v-icon>
       </v-btn>
     </v-card>
