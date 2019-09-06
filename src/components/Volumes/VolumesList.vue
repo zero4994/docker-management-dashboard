@@ -212,8 +212,5 @@ export default {
 };
 </script>
 
-<style scoped>
-i.icon-padding-left {
-  padding-left: 1rem;
-}
+<style>
 </style>

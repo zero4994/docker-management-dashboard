@@ -9,13 +9,19 @@
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>Created</v-list-tile-title>
-        <v-list-tile-sub-title>{{ this.created }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{ formatDate(this.image.Created) }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>Labels</v-list-tile-title>
         <v-list-tile-sub-title>{{ this.image.Label }}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>RepoTags</v-list-tile-title>
+        <v-list-tile-sub-title>{{ this.image.RepoTags }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
@@ -71,9 +77,10 @@
 import moment from "moment";
 
 export default {
-  props: ["image"],
+  // props: ["image"],
   data: () => ({
-    created: ""
+    created: "",
+    image: { Created: 0, Size: 0, VirtualSize: 0 }
   }),
   methods: {
     bytesToSize: function(bytes) {
@@ -85,11 +92,18 @@ export default {
       );
       if (i === 0) return `${bytes} ${sizes[i]})`;
       return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
+    },
+    formatDate(date) {
+      if (date === 0) {
+        return "";
+      }
+
+      const millis = Number(date) * 1000;
+      return moment(millis).fromNow();
+    },
+    onSelectedImage(image) {
+      this.image = image;
     }
-  },
-  mounted() {
-    const millis = Number(this.image.Created) * 1000;
-    this.created = moment(millis).fromNow();
   }
 };
 </script>

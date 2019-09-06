@@ -7,7 +7,7 @@
           <v-spacer></v-spacer>
           <v-btn color="cyan" dark @click="fetchAllImages">
             Refresh
-            <v-icon>refresh</v-icon>
+            <v-icon class="icon-padding-left">refresh</v-icon>
           </v-btn>
         </v-layout>
       </v-container>
@@ -15,14 +15,14 @@
       <v-container fluid grid-list-md>
         <v-layout row wrap>
           <v-flex v-for="image in this.images" :key="image.Id" v-bind="{ [`md4`]: true }" sm4>
-            <docker-image v-bind:image="image" v-on:changeView="changeView"/>
+            <docker-image v-bind:image="image" v-on:changeView="changeView" />
           </v-flex>
         </v-layout>
       </v-container>
     </div>
 
     <div v-else>
-      <docker-image-expanded v-bind:image="this.selectedImage"/>
+      <docker-image-expanded v-bind:image="this.selectedImage" />
     </div>
   </div>
 </template>

@@ -1,12 +1,7 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
-      <v-layout row wrap>
-        <h2>{{ this.image.RepoTags[0].split(":")[0] }}</h2>
-      </v-layout>
-    </v-container>
-
-    <v-container fluid grid-list-md>
+      <h1 class="mb-2">{{ this.image.name }}</h1>
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
           <v-card>
@@ -17,10 +12,10 @@
                 </v-flex>
                 <v-flex v-bind="{ [`md4`]: true }">
                   <v-select
-                    :items="versions"
-                    label="Version"
+                    :items="tags"
+                    label="Tags"
                     outline
-                    @change="changeSelectedVersion"
+                    @change="changeSelectedTag"
                     v-bind:error="isError"
                     v-bind:error-messages="errorMessages"
                   ></v-select>
@@ -49,7 +44,7 @@
             <v-card-actions>
               <span class="headline">Additional Info</span>
             </v-card-actions>
-            <image-additional-info v-bind:image="image"/>
+            <image-additional-info ref="additionalInfo" />
           </v-card>
         </v-flex>
       </v-layout>
@@ -71,15 +66,13 @@ export default {
     localPort: "",
     rawOptions: "",
     currentTab: "raw",
-    versions: [],
-    selectedVersion: "",
+    tags: [],
+    selectedTag: "",
     errorMessages: [],
     isError: false
   }),
   mounted() {
-    this.versions = this.image.RepoTags.map(tag => {
-      return tag.split(":")[1];
-    });
+    this.tags = Object.keys(this.image.tags);
   },
   methods: {
     changeTab: function(view) {
@@ -87,9 +80,9 @@ export default {
     },
     startContainer: async function() {
       try {
-        if (this.selectedVersion === "") {
+        if (this.selectedTag === "") {
           this.isError = true;
-          this.errorMessages = "Version must be selected";
+          this.errorMessages = "Tag must be selected";
           return;
         }
 
@@ -97,9 +90,7 @@ export default {
         if (this.currentTab === "raw" && this.rawOptions.length > 0) {
           containerOptions = JSON.parse(this.rawOptions);
         }
-        containerOptions.Image = `${this.image.RepoTags[0].split(":")[0]}:${
-          this.selectedVersion
-        }`;
+        containerOptions.Image = `${this.image.name}:${this.selectedTag}`;
 
         const containerID = await createContainer.bind(this)(containerOptions);
 
@@ -116,10 +107,11 @@ export default {
         });
       }
     },
-    changeSelectedVersion(selected) {
+    changeSelectedTag(selected) {
       this.isError = false;
       this.errorMessages = "";
-      this.selectedVersion = selected;
+      this.selectedTag = selected;
+      this.$refs.additionalInfo.onSelectedImage(this.image.tags[selected]);
     }
   }
 };
