@@ -50,3 +50,8 @@ export const removeImage = async function(id) {
   const result = await image.remove();
   console.log({ result });
 };
+
+export const getImagesAmount = async function() {
+  const images = await docker.listImages({ all: false });
+  return images.length;
+};
