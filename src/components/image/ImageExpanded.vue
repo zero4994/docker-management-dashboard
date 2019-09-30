@@ -1,7 +1,15 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
-      <h1 class="mb-2">{{ this.image.name }}</h1>
+      <v-layout row wrap>
+        <h1 class="mb-2">{{ this.image.name }}</h1>
+        <v-spacer></v-spacer>
+        <v-btn color="light-blue" dark @click="$emit('changeView', {}, 'all')">
+          Back
+          <v-icon class="icon-padding-left">arrow_back</v-icon>
+        </v-btn>
+      </v-layout>
+
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
           <v-card>
