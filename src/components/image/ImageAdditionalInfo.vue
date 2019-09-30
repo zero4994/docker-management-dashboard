@@ -101,7 +101,7 @@ export default {
       const millis = Number(date) * 1000;
       return moment(millis).fromNow();
     },
-    onSelectedImage(image) {
+    onSelectedImage(image = { Created: 0, Size: 0, VirtualSize: 0 }) {
       this.image = image;
     }
   }

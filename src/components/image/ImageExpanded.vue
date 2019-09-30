@@ -84,9 +84,12 @@ export default {
     isBtnDisabled: true
   }),
   mounted() {
-    this.tags = Object.keys(this.image.tags);
+    this.refreshTags();
   },
   methods: {
+    refreshTags: function() {
+      this.tags = Object.keys(this.image.tags);
+    },
     changeTab: function(view) {
       this.currentTab = view;
     },
@@ -137,12 +140,19 @@ export default {
           }
         });
 
-        console.log({ confirmation });
         if (typeof confirmation === "undefined" || !confirmation) {
           return;
         }
-        console.log("something");
-        await removeImage(this.image.name);
+
+        await removeImage(this.image.tags[this.selectedTag].Id);
+
+        this.$dialog.message.success("Image successfully removed", {
+          position: "top-left"
+        });
+
+        delete this.image.tags[this.selectedTag];
+        this.changeSelectedTag("");
+        this.refreshTags();
       } catch (error) {
         console.error(error);
         this.$dialog.message.error("Error removing image", {
