@@ -22,7 +22,11 @@
     </div>
 
     <div v-else>
-      <docker-image-expanded v-bind:image="this.selectedImage" />
+      <docker-image-expanded
+        v-bind:image="this.selectedImage"
+        v-on:changeView="changeView"
+        v-on:fetchAllImages="fetchAllImages"
+      />
     </div>
   </div>
 </template>
@@ -54,8 +58,8 @@ export default {
         this.$dialog.message.error(error.toString(), { position: "top" });
       }
     },
-    changeView: function(image) {
-      this.currentView = "single";
+    changeView: function(image, currentView = "single") {
+      this.currentView = currentView;
       this.selectedImage = image;
     }
   }

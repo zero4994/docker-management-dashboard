@@ -1,7 +1,15 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
-      <h1 class="mb-2">{{ this.image.name }}</h1>
+      <v-layout row wrap>
+        <h1 class="mb-2">{{ this.image.name }}</h1>
+        <v-spacer></v-spacer>
+        <v-btn color="light-blue" dark @click="$emit('changeView', {}, 'all')">
+          Back
+          <v-icon class="icon-padding-left">arrow_back</v-icon>
+        </v-btn>
+      </v-layout>
+
       <v-layout row wrap>
         <v-flex v-bind="{ [`md8`]: true }">
           <v-card>
@@ -46,6 +54,16 @@
             </v-card-actions>
             <image-additional-info ref="additionalInfo" />
           </v-card>
+          <v-btn
+            block
+            :disabled="isBtnDisabled"
+            class="white--text"
+            color="red darken-4"
+            @click="deleteImage"
+          >
+            Delete Image
+            <i class="fas fa-trash-alt icon-padding-left"></i>
+          </v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -55,6 +73,7 @@
 <script>
 import ImageAdditionalInfo from "./ImageAdditionalInfo.vue";
 import { createContainer } from "../../services/ContainerService";
+import { removeImage } from "../../services/ImageService";
 
 export default {
   props: ["image"],
@@ -69,12 +88,16 @@ export default {
     tags: [],
     selectedTag: "",
     errorMessages: [],
-    isError: false
+    isError: false,
+    isBtnDisabled: true
   }),
   mounted() {
-    this.tags = Object.keys(this.image.tags);
+    this.refreshTags();
   },
   methods: {
+    refreshTags: function() {
+      this.tags = Object.keys(this.image.tags);
+    },
     changeTab: function(view) {
       this.currentTab = view;
     },
@@ -112,6 +135,44 @@ export default {
       this.errorMessages = "";
       this.selectedTag = selected;
       this.$refs.additionalInfo.onSelectedImage(this.image.tags[selected]);
+      this.isBtnDisabled = false;
+    },
+    async deleteImage() {
+      try {
+        const confirmation = await this.$dialog.confirm({
+          text: `This will remove "${this.image.name}:${this.selectedTag}", along with any untagged parent images. Are you sure you want to continue?`,
+          title: "Delete Image",
+          actions: {
+            false: "No",
+            true: "Yes"
+          }
+        });
+
+        if (typeof confirmation === "undefined" || !confirmation) {
+          return;
+        }
+
+        await removeImage(this.image.tags[this.selectedTag].Id);
+
+        this.$dialog.message.success("Image successfully removed", {
+          position: "top-left"
+        });
+
+        delete this.image.tags[this.selectedTag];
+
+        if (Object.keys(this.image.tags).length > 0) {
+          this.changeSelectedTag("");
+          this.refreshTags();
+        } else {
+          this.$emit("changeView", {}, "all");
+          this.$emit("fetchAllImages");
+        }
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error removing image", {
+          position: "top-left"
+        });
+      }
     }
   }
 };
