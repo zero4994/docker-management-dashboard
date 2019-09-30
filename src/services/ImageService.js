@@ -44,7 +44,10 @@ const groupImagesByTag = function(images) {
   return imagesArray;
 };
 
-export const removeImage = async function(name) {
-  const image = docker.getImage(name);
+export const removeImage = async function(id) {
+  console.log("Removing image:", id);
+  const image = docker.getImage(id);
+  const result = await image.remove();
+  console.log("Result: ", result);
   console.log("image ==>", image);
 };
