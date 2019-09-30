@@ -46,6 +46,16 @@
             </v-card-actions>
             <image-additional-info ref="additionalInfo" />
           </v-card>
+          <v-btn
+            block
+            :disabled="isBtnDisabled"
+            class="white--text"
+            color="red darken-4"
+            @click="deleteImage"
+          >
+            Delete Image
+            <i class="fas fa-trash-alt icon-padding-left"></i>
+          </v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -55,6 +65,7 @@
 <script>
 import ImageAdditionalInfo from "./ImageAdditionalInfo.vue";
 import { createContainer } from "../../services/ContainerService";
+import { removeImage } from "../../services/ImageService";
 
 export default {
   props: ["image"],
@@ -69,7 +80,8 @@ export default {
     tags: [],
     selectedTag: "",
     errorMessages: [],
-    isError: false
+    isError: false,
+    isBtnDisabled: true
   }),
   mounted() {
     this.tags = Object.keys(this.image.tags);
@@ -112,6 +124,31 @@ export default {
       this.errorMessages = "";
       this.selectedTag = selected;
       this.$refs.additionalInfo.onSelectedImage(this.image.tags[selected]);
+      this.isBtnDisabled = false;
+    },
+    async deleteImage() {
+      try {
+        const confirmation = await this.$dialog.confirm({
+          text: `This will remove "${this.image.name}", along with any untagged parent images. Are you sure you want to continue?`,
+          title: "Delete Image",
+          actions: {
+            false: "No",
+            true: "Yes"
+          }
+        });
+
+        console.log({ confirmation });
+        if (typeof confirmation === "undefined" || !confirmation) {
+          return;
+        }
+        console.log("something");
+        await removeImage(this.image.name);
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error removing image", {
+          position: "top-left"
+        });
+      }
     }
   }
 };
