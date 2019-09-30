@@ -48,6 +48,5 @@ export const removeImage = async function(id) {
   console.log("Removing image:", id);
   const image = docker.getImage(id);
   const result = await image.remove();
-  console.log("Result: ", result);
-  console.log("image ==>", image);
+  console.log({ result });
 };
