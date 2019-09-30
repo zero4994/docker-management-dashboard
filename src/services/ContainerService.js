@@ -87,3 +87,19 @@ export const getContainerLogs = async function(id, setLogs) {
   //   logStream.end("en");
   // });
 };
+
+export const getContainersByStatus = async function() {
+  console.debug("Querying all containers by status...");
+  const containers = await docker.listContainers({ all: true });
+  const status = {
+    running: 0,
+    paused: 0,
+    exited: 0
+  };
+  for (let i = 0; i < containers.length; i++) {
+    status[containers[i].State] += 1;
+  }
+  console.debug("Containers: ", containers);
+  console.debug(status);
+  return status;
+};
