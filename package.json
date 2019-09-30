@@ -12,7 +12,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "dockerode": "^2.5.8",
+    "dockerode": "3.0.1",
     "moment": "^2.24.0",
     "vue": "^2.5.16",
     "vue-command": "^6.2.3",
