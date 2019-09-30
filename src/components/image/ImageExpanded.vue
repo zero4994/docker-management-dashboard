@@ -132,7 +132,7 @@ export default {
     async deleteImage() {
       try {
         const confirmation = await this.$dialog.confirm({
-          text: `This will remove "${this.image.name}", along with any untagged parent images. Are you sure you want to continue?`,
+          text: `This will remove "${this.image.name}:${this.selectedTag}", along with any untagged parent images. Are you sure you want to continue?`,
           title: "Delete Image",
           actions: {
             false: "No",
@@ -151,8 +151,14 @@ export default {
         });
 
         delete this.image.tags[this.selectedTag];
-        this.changeSelectedTag("");
-        this.refreshTags();
+
+        if (Object.keys(this.image.tags).length > 0) {
+          this.changeSelectedTag("");
+          this.refreshTags();
+        } else {
+          this.$emit("changeView", {}, "all");
+          this.$emit("fetchAllImages");
+        }
       } catch (error) {
         console.error(error);
         this.$dialog.message.error("Error removing image", {
