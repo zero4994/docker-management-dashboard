@@ -6,6 +6,7 @@
       <containers-list v-else-if="this.currentView === 'Containers'" />
       <volumes-list v-else-if="this.currentView === 'Volumes'" />
     </v-content>
+    <custom-footer />
   </v-app>
 </template>
 
@@ -14,6 +15,7 @@ import Navbar from "./components/Navbar.vue";
 import ImagesList from "./components/image/ImagesList.vue";
 import ContainerList from "./components/container/ContainerList.vue";
 import VolumesList from "./components/Volumes/VolumesList.vue";
+import Footer from "./components/Footer";
 
 export default {
   name: "App",
@@ -21,7 +23,8 @@ export default {
     navbar: Navbar,
     "images-list": ImagesList,
     "containers-list": ContainerList,
-    "volumes-list": VolumesList
+    "volumes-list": VolumesList,
+    "custom-footer": Footer
   },
   data: () => ({
     currentView: "Images"
