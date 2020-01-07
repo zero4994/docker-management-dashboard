@@ -64,3 +64,4 @@ typings/
 #Electron-builder output
 /dist_electron
 .idea/*
+.vscode/*
