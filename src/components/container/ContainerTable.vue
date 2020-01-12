@@ -22,7 +22,7 @@
       <v-btn
         color="red darken-3"
         :dark="!isDisabled"
-        @click="onStopContainer"
+        @click="onStopContainer(props.item.Id)"
         :disabled="isDisabled"
         icon
       >
@@ -31,7 +31,7 @@
       <v-btn
         color="light-green lighten-1"
         :dark="!isDisabled"
-        @click="onUnpauseContainer"
+        @click="onUnpauseContainer(props.item.Id)"
         :disabled="isDisabled"
         icon
       >
@@ -40,7 +40,7 @@
       <v-btn
         color="grey darken-4"
         :dark="!isDisabled"
-        @click="onRemoveContainer"
+        @click="onRemoveContainer(props.item.Id)"
         :disabled="isDisabled"
         icon
       >
@@ -110,11 +110,11 @@ export default {
     formatDate: function(date) {
       return moment(date).format("LLL");
     },
-    onStopContainer: async function() {
+    onStopContainer: async function(id) {
       try {
         this.isDisabled = true;
-        await stopContainer.bind(this)(this.container.Id);
-        this.$emit("fetchAllContainers");
+        await stopContainer.bind(this)(id);
+        this.fetchAllContainers();
 
         this.$dialog.message.success("Container successfully stopped", {
           position: "top-left"
@@ -127,7 +127,7 @@ export default {
       }
       this.isDisabled = false;
     },
-    onRemoveContainer: async function() {
+    onRemoveContainer: async function(id) {
       try {
         const forceRemove = await this.$dialog.confirm({
           text: "Do you want to force remove the container?",
@@ -142,8 +142,9 @@ export default {
           return;
         }
         this.isDisabled = true;
-        await deleteContainer.bind(this)(this.container.Id, forceRemove);
-        this.$emit("fetchAllContainers");
+        await deleteContainer.bind(this)(id, forceRemove);
+        this.isDisabled = false;
+        this.fetchAllContainers();
         this.$dialog.message.success("Container removed", {
           position: "top-left"
         });
@@ -155,13 +156,15 @@ export default {
         });
       }
     },
-    onUnpauseContainer: async function() {
+    onUnpauseContainer: async function(id) {
       try {
-        await unpauseContainer(this.id);
+        await unpauseContainer(id);
+        this.isDisabled = true;
         this.$dialog.message.success("Container successfully unpaused", {
           position: "top-left"
         });
-        this.$emit("fetchAllContainers");
+        this.isDisabled = false;
+        this.fetchAllContainers();
       } catch (error) {
         console.error(error);
         this.$dialog.message.error("Error unpausing container", {
