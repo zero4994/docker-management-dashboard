@@ -9,7 +9,7 @@
       </v-container>
 
       <v-container fluid grid-list-md>
-        <v-layout row wrap>
+        <!-- <v-layout row wrap>
           <v-flex
             v-for="container in this.containers"
             :key="container.Id"
@@ -21,7 +21,8 @@
               v-on:fetchAllContainers="fetchAllContainers"
             />
           </v-flex>
-        </v-layout>
+        </v-layout> -->
+        <docker-conatiner-table />
       </v-container>
     </div>
     <div v-else>
@@ -36,46 +37,44 @@
 <script>
 import ContainerPreview from "./ContainerPreview.vue";
 import Container from "./Container.vue";
-import { allContainers } from "../../services/ContainerService.js";
+import ContainerTable from "./ContainerTable.vue";
+
 export default {
   components: {
     "docker-container-preview": ContainerPreview,
-    "docker-container": Container
+    "docker-container": Container,
+    "docker-conatiner-table": ContainerTable
   },
   mounted: function() {
     this.currentView = "all";
-    this.fetchAllContainers();
-    this.interval = setInterval(() => {
-      this.fetchAllContainers();
-    }, 5000);
+    // this.fetchAllContainers();
+    // this.interval = setInterval(() => {
+    //   this.fetchAllContainers();
+    // }, 5000);
   },
   data: () => ({
-    containers: [],
+    // containers: [],
     currentView: "all",
-    interval: {},
+    // interval: {},
     selectedId: ""
   }),
   methods: {
-    fetchAllContainers: async function() {
-      this.containers = await allContainers.bind(this)();
-    },
+    // fetchAllContainers: async function() {
+    //   this.containers = await allContainers.bind(this)();
+    // },
     changeView: function(id, view) {
       console.log("this is the id", id, view);
-      if (view === "all") {
+      // if (view === "all") {
+      this.fetchAllContainers();
+      this.interval = setInterval(() => {
         this.fetchAllContainers();
-        this.interval = setInterval(() => {
-          this.fetchAllContainers();
-        }, 5000);
-      } else {
-        clearInterval(this.interval);
-      }
+      }, 5000);
+      // } else {
+      //   clearInterval(this.interval);
+      // }
       this.selectedId = id;
       this.currentView = view;
     }
-  },
-  beforeDestroy() {
-    console.log("clearing interval");
-    clearInterval(this.interval);
   }
 };
 </script>
