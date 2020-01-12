@@ -36,7 +36,12 @@
 
               <v-tab-item>
                 <v-card>
-                  <v-textarea solo v-model="rawOptions" rows="20" no-resize></v-textarea>
+                  <v-textarea
+                    solo
+                    v-model="rawOptions"
+                    rows="20"
+                    no-resize
+                  ></v-textarea>
                 </v-card>
               </v-tab-item>
             </v-tabs>
@@ -115,14 +120,11 @@ export default {
         }
         containerOptions.Image = `${this.image.name}:${this.selectedTag}`;
 
-        const containerID = await createContainer.bind(this)(containerOptions);
+        await createContainer.bind(this)(containerOptions);
 
-        this.$dialog.message.success(
-          `Container created with id: ${containerID}`,
-          {
-            position: "top-left"
-          }
-        );
+        this.$dialog.message.success("Container created", {
+          position: "top-left"
+        });
       } catch (error) {
         console.error(error);
         this.$dialog.message.error("Error starting the container", {
