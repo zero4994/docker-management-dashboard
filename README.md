@@ -2,8 +2,6 @@
 
 A management dashboard for your local docker containers
 
-> This was created during my time as a student at Code Chrysalis
-
 <p align="center">
     <img align="center" src="img/docker.png"> 
 </p> 
