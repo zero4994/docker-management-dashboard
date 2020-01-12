@@ -43,7 +43,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss">
 .vue-command {
   .term {

@@ -16,9 +16,7 @@ export const allContainers = async function() {
 export const createContainer = async function(options) {
   console.log(`Creating container`);
   const container = await docker.createContainer(options);
-  const process = await container.start();
-
-  return process.id;
+  await container.start();
 };
 
 export const containerById = async function(id) {

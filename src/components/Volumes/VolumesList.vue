@@ -44,7 +44,12 @@
           </v-btn>
         </template>
       </v-data-table>
-      <v-footer color="#e9ebee" absolute height="60">
+      <v-footer
+        color="#e9ebee"
+        absolute
+        height="60"
+        style="margin-bottom: 2rem"
+      >
         <v-btn color="red darken-4" dark @click="pruneVolumes" absolute right>
           Prune Volumes
           <i class="fas fa-trash-alt icon-padding-left"></i>
@@ -212,5 +217,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

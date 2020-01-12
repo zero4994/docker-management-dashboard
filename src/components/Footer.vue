@@ -1,5 +1,11 @@
 <template>
-  <v-footer class="pa-3" style="min-height: 0px" dark color="light-blue darken-2" fixed>
+  <v-footer
+    class="pa-3"
+    style="min-height: 0px"
+    dark
+    color="light-blue darken-2"
+    fixed
+  >
     <div class="mr-4">Images: {{ this.images }}</div>
     <div class="mr-4">Running Containers: {{ this.status.running }}</div>
     <div class="mr-4">Paused Containers: {{ this.status.paused }}</div>
@@ -33,5 +39,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

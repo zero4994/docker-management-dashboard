@@ -4,7 +4,11 @@
       <v-card-actions>
         <span class="title">{{ container.Image }}</span>
         <v-spacer></v-spacer>
-        <v-btn color="indigo" dark @click="$emit('changeView', container.Id, 'single')">
+        <v-btn
+          color="indigo"
+          dark
+          @click="$emit('changeView', container.Id, 'single')"
+        >
           <v-icon>open_in_new</v-icon>
         </v-btn>
       </v-card-actions>
@@ -13,9 +17,7 @@
           <v-list-tile-content>
             <v-list-tile-title>ID</v-list-tile-title>
             <v-list-tile-sub-title>
-              {{
-              this.container.Id
-              }}
+              {{ this.container.Id }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -23,9 +25,7 @@
           <v-list-tile-content>
             <v-list-tile-title>Status</v-list-tile-title>
             <v-list-tile-sub-title>
-              {{
-              this.container.Status
-              }}
+              {{ this.container.Status }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -33,9 +33,7 @@
           <v-list-tile-content>
             <v-list-tile-title>State</v-list-tile-title>
             <v-list-tile-sub-title>
-              {{
-              this.container.State
-              }}
+              {{ this.container.State }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>

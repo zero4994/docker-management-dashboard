@@ -14,7 +14,12 @@
 
       <v-container fluid grid-list-md>
         <v-layout row wrap>
-          <v-flex v-for="image in this.images" :key="image.Id" v-bind="{ [`md4`]: true }" sm4>
+          <v-flex
+            v-for="image in this.images"
+            :key="image.Id"
+            v-bind="{ [`md4`]: true }"
+            sm4
+          >
             <docker-image v-bind:image="image" v-on:changeView="changeView" />
           </v-flex>
         </v-layout>

@@ -1,7 +1,11 @@
 <template>
   <div>
     <span class="headline">Container Logs</span>
-    <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+    <terminal
+      ref="terminal"
+      :id="this.id"
+      :configuration="this.configuration"
+    />
   </div>
 </template>
 
@@ -38,5 +42,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
