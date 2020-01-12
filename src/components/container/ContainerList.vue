@@ -1,14 +1,14 @@
 <template>
   <div id="Containerlist">
     <div v-if="this.currentView === 'all'">
-      <v-container fluid grid-list-md>
+      <v-container fluid grid-list-md style="padding: 24px 24px 0px 24px">
         <v-layout row wrap>
           <h1>Containers</h1>
           <v-spacer></v-spacer>
         </v-layout>
       </v-container>
 
-      <v-container fluid grid-list-md>
+      <v-container fluid grid-list-md style="padding: 0px 24px 24px 24px">
         <docker-conatiner-table v-on:changeView="changeView" />
       </v-container>
     </div>
