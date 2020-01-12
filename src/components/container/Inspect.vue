@@ -1,7 +1,11 @@
 <template>
   <div>
     <span class="headline mb-4">Inspect Container</span>
-    <terminal ref="terminal" :id="this.id" :configuration="this.configuration" />
+    <terminal
+      ref="terminal"
+      :id="this.id"
+      :configuration="this.configuration"
+    />
   </div>
 </template>
 

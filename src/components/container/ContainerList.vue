@@ -25,7 +25,10 @@
       </v-container>
     </div>
     <div v-else>
-      <docker-container v-bind:containerId="this.selectedId" v-on:changeView="changeView" />
+      <docker-container
+        v-bind:containerId="this.selectedId"
+        v-on:changeView="changeView"
+      />
     </div>
   </div>
 </template>
@@ -77,5 +80,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

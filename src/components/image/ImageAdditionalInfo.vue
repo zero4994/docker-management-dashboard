@@ -9,7 +9,9 @@
     <v-list-tile>
       <v-list-tile-content>
         <v-list-tile-title>Created</v-list-tile-title>
-        <v-list-tile-sub-title>{{ formatDate(this.image.Created) }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{
+          formatDate(this.image.Created)
+        }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile>
@@ -34,9 +36,7 @@
       <v-list-tile-content>
         <v-list-tile-title>RepoDigests</v-list-tile-title>
         <v-list-tile-sub-title>
-          {{
-          this.image.RepoDigests
-          }}
+          {{ this.image.RepoDigests }}
         </v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
@@ -44,9 +44,7 @@
       <v-list-tile-content>
         <v-list-tile-title>SharedSize</v-list-tile-title>
         <v-list-tile-sub-title>
-          {{
-          this.image.SharedSize
-          }}
+          {{ this.image.SharedSize }}
         </v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
@@ -54,9 +52,7 @@
       <v-list-tile-content>
         <v-list-tile-title>Size</v-list-tile-title>
         <v-list-tile-sub-title>
-          {{
-          this.bytesToSize(this.image.Size)
-          }}
+          {{ this.bytesToSize(this.image.Size) }}
         </v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>
@@ -64,9 +60,7 @@
       <v-list-tile-content>
         <v-list-tile-title>VirtualSize</v-list-tile-title>
         <v-list-tile-sub-title>
-          {{
-          this.bytesToSize(this.image.VirtualSize)
-          }}
+          {{ this.bytesToSize(this.image.VirtualSize) }}
         </v-list-tile-sub-title>
       </v-list-tile-content>
     </v-list-tile>

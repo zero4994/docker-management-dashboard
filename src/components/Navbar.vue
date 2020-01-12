@@ -14,7 +14,11 @@
       <v-list class="pt-4" dense>
         <v-divider light></v-divider>
 
-        <v-list-tile v-for="item in items" :key="item.title" @click="onOptionSelected(item.view)">
+        <v-list-tile
+          v-for="item in items"
+          :key="item.title"
+          @click="onOptionSelected(item.view)"
+        >
           <v-list-tile-action v-html="item.icon"></v-list-tile-action>
 
           <v-list-tile-content>

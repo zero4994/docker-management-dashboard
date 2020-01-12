@@ -28,7 +28,12 @@
     <v-layout row wrap>
       <v-flex v-bind="{ [`md3`]: true }"></v-flex>
       <v-flex v-bind="{ [`md6`]: true }">
-        <v-btn color="light-green lighten-1" dark block @click="onUnpauseContainer">
+        <v-btn
+          color="light-green lighten-1"
+          dark
+          block
+          @click="onUnpauseContainer"
+        >
           UNPAUSE
           <v-icon>play_arrow</v-icon>
         </v-btn>
