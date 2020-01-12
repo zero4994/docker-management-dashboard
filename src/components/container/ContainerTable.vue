@@ -55,11 +55,17 @@
 <script>
 import { allContainers } from "../../services/ContainerService.js";
 import moment from "moment";
+import {
+  stopContainer,
+  deleteContainer,
+  unpauseContainer
+} from "../../services/ContainerService.js";
 
 export default {
   data: () => ({
     containers: [],
     interval: {},
+    isDisabled: false,
     headers: [
       {
         text: "Name",
@@ -106,6 +112,65 @@ export default {
     },
     formatDate: function(date) {
       return moment(date).format("LLL");
+    },
+    onStopContainer: async function() {
+      try {
+        this.isDisabled = true;
+        await stopContainer.bind(this)(this.container.Id);
+        this.$emit("fetchAllContainers");
+
+        this.$dialog.message.success("Container successfully stopped", {
+          position: "top-left"
+        });
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error stopping container", {
+          position: "top-left"
+        });
+      }
+      this.isDisabled = false;
+    },
+    onRemoveContainer: async function() {
+      try {
+        const forceRemove = await this.$dialog.confirm({
+          text: "Do you want to force remove the container?",
+          title: "Remove Container",
+          actions: {
+            false: "No",
+            true: "Yes"
+          }
+        });
+
+        if (typeof forceRemove === "undefined") {
+          return;
+        }
+        this.isDisabled = true;
+        await deleteContainer.bind(this)(this.container.Id, forceRemove);
+        this.$emit("fetchAllContainers");
+        this.$dialog.message.success("Container removed", {
+          position: "top-left"
+        });
+      } catch (error) {
+        console.error(error);
+        this.isDisabled = false;
+        this.$dialog.message.error("Error removing the container", {
+          position: "top-left"
+        });
+      }
+    },
+    onUnpauseContainer: async function() {
+      try {
+        await unpauseContainer(this.id);
+        this.$dialog.message.success("Container successfully unpaused", {
+          position: "top-left"
+        });
+        this.$emit("fetchAllContainers");
+      } catch (error) {
+        console.error(error);
+        this.$dialog.message.error("Error unpausing container", {
+          position: "top-left"
+        });
+      }
     }
   },
   beforeDestroy() {
