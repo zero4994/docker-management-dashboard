@@ -1,53 +1,69 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="this.containers"
-    class="elevation-1 mt-4 mb-4"
-    :rows-per-page-items="[10]"
-  >
-    <template v-slot:items="props">
-      <td>{{ props.item.Image }}</td>
-      <td>{{ props.item.Id.substr(0, 15) }}</td>
-      <td>{{ formatDate(props.item.Created) }}</td>
-      <td>{{ props.item.Status }}</td>
-      <td>{{ props.item.State }}</td>
-      <v-btn
-        color="indigo"
-        dark
-        icon
-        @click="$emit('changeView', props.item.Id, 'single')"
-      >
-        <v-icon>open_in_new</v-icon>
-      </v-btn>
-      <v-btn
-        color="red darken-3"
-        :dark="!isDisabled"
-        @click="onStopContainer(props.item.Id)"
-        :disabled="isDisabled"
-        icon
-      >
-        <v-icon>stop</v-icon>
-      </v-btn>
-      <v-btn
-        color="light-green lighten-1"
-        :dark="!isDisabled"
-        @click="onUnpauseContainer(props.item.Id)"
-        :disabled="isDisabled"
-        icon
-      >
-        <v-icon>play_arrow</v-icon>
-      </v-btn>
-      <v-btn
-        color="grey darken-4"
-        :dark="!isDisabled"
-        @click="onRemoveContainer(props.item.Id)"
-        :disabled="isDisabled"
-        icon
-      >
-        <i class="fas fa-trash-alt"></i>
-      </v-btn>
-    </template>
-  </v-data-table>
+  <div>
+    <v-layout>
+      <v-flex md8></v-flex>
+      <v-flex md4>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-flex>
+    </v-layout>
+    <v-data-table
+      :headers="headers"
+      :items="this.containers"
+      class="elevation-1 mt-4 mb-4"
+      :rows-per-page-items="[10]"
+      :search="search"
+    >
+      <template v-slot:items="props">
+        <td>{{ props.item.Image }}</td>
+        <td>{{ props.item.Id.substr(0, 15) }}</td>
+        <td>{{ formatDate(props.item.Created) }}</td>
+        <td>{{ props.item.Status }}</td>
+        <td>{{ props.item.State }}</td>
+        <v-btn
+          color="indigo"
+          dark
+          icon
+          @click="$emit('changeView', props.item.Id, 'single')"
+        >
+          <v-icon>open_in_new</v-icon>
+        </v-btn>
+        <v-btn
+          color="red darken-3"
+          :dark="!isDisabled"
+          @click="onStopContainer(props.item.Id)"
+          :disabled="isDisabled"
+          icon
+        >
+          <v-icon>stop</v-icon>
+        </v-btn>
+        <v-btn
+          color="light-green lighten-1"
+          :dark="!isDisabled"
+          @click="onUnpauseContainer(props.item.Id)"
+          :disabled="isDisabled"
+          icon
+        >
+          <v-icon>play_arrow</v-icon>
+        </v-btn>
+        <v-btn
+          color="grey darken-4"
+          :dark="!isDisabled"
+          @click="onRemoveContainer(props.item.Id)"
+          :disabled="isDisabled"
+          icon
+        >
+          <i class="fas fa-trash-alt"></i>
+        </v-btn>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
@@ -64,6 +80,7 @@ export default {
     containers: [],
     interval: {},
     isDisabled: false,
+    search: "",
     headers: [
       {
         text: "Name",
